@@ -1,20 +1,21 @@
+import { useNavigate } from 'react-router-dom'
 import { SiteFooter } from '../components/layout/SiteFooter'
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { pendingPageContent } from '../data/siteData'
-import type { Page } from '../types/routes'
+import { pagePaths, type Page } from '../types/routes'
 import './PendingPage.css'
 
 type PendingPageProps = {
   page: Page
-  onNavigate: (page: Page) => void
 }
 
-export function PendingPage({ page, onNavigate }: PendingPageProps) {
+export function PendingPage({ page }: PendingPageProps) {
+  const navigate = useNavigate()
   const content = pendingPageContent[page] ?? pendingPageContent.home!
 
   return (
     <div className="page pending-page">
-      <SiteHeader page={page} onNavigate={onNavigate} />
+      <SiteHeader />
       <main>
         <section className="pending-hero">
           <div className="pending-hero-content">
@@ -22,8 +23,8 @@ export function PendingPage({ page, onNavigate }: PendingPageProps) {
             <h1>{content.title}</h1>
             <p>{content.description}</p>
             <div className="pending-actions">
-              <button className="pending-primary" onClick={() => onNavigate('planner')}>规划治疗路径</button>
-              <button className="pending-secondary" onClick={() => onNavigate('diseases')}>浏览疾病与治疗</button>
+              <button className="pending-primary" onClick={() => navigate(pagePaths.planner)}>规划治疗路径</button>
+              <button className="pending-secondary" onClick={() => navigate(pagePaths.diseases)}>浏览疾病与治疗</button>
             </div>
           </div>
           <div className="pending-visual" aria-hidden="true">

@@ -3,9 +3,8 @@ import { DiseaseModal } from '../components/diseases/DiseaseModal'
 import { SiteFooter } from '../components/layout/SiteFooter'
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { alphabet, bodyDiseases, bodyTabs } from '../data/siteData'
-import type { Page } from '../types/routes'
 
-export function DiseaseSearchPage({ onNavigate }: { onNavigate: (page: Page) => void }) {
+export function DiseaseSearchPage() {
   const [query, setQuery] = useState('')
   const [tab, setTab] = useState(bodyTabs[0])
   const [letter, setLetter] = useState('S')
@@ -14,7 +13,7 @@ export function DiseaseSearchPage({ onNavigate }: { onNavigate: (page: Page) => 
 
   return (
     <div className="page disease-page">
-      <SiteHeader page="diseases" onNavigate={onNavigate} />
+      <SiteHeader />
       <section className="disease-hero">
         <div className="hero-content">
           <h1>找到与您疾病匹配的全球最佳治疗路径</h1>

@@ -1,18 +1,20 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { SiteFooter } from '../components/layout/SiteFooter'
 import { hotSearches } from '../data/siteData'
-import type { Page } from '../types/routes'
+import { pagePaths } from '../types/routes'
 
-export function SearchPage({ onNavigate }: { onNavigate: (page: Page) => void }) {
+export function SearchPage() {
+  const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const submit = (value = query) => {
-    if (value.trim()) onNavigate('diseases')
+    if (value.trim()) navigate(pagePaths.diseases)
   }
 
   return (
     <div className="page search-page">
       <div className="search-shell">
-        <button className="close" aria-label="关闭" onClick={() => onNavigate('home')}>×</button>
+        <button className="close" aria-label="关闭" onClick={() => navigate(pagePaths.home)}>×</button>
         <div className="search-title-row">
           <input autoFocus value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => event.key === 'Enter' && submit()} placeholder="在此搜索" />
           <button onClick={() => submit()} aria-label="提交搜索">⌕</button>
