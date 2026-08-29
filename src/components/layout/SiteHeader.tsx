@@ -1,6 +1,7 @@
 import logo from '../../assets/lanhu/logo.png'
 import { navigationItems } from '../../data/siteData'
 import type { Page } from '../../types/routes'
+import './SiteHeader.css'
 
 type SiteHeaderProps = {
   page: Page
@@ -11,28 +12,30 @@ export function SiteHeader({ page, onNavigate }: SiteHeaderProps) {
   return (
     <>
       <div className="utility-bar">
-        <span>找医生</span>
-        <span>找医院</span>
-        <span className="utility-link" onClick={() => onNavigate('planner')}>寻找治疗方法</span>
-        <span className="utility-active">预约服务 ↗</span>
+        <button onClick={() => onNavigate('doctors')}>找医生</button>
+        <button onClick={() => onNavigate('hospitals')}>找医院</button>
+        <button onClick={() => onNavigate('planner')}>寻找治疗方法</button>
+        <button className="utility-active" onClick={() => onNavigate('appointment')}>预约服务 ↗</button>
       </div>
       <header className="site-header">
-        <img src={logo} className="brand-logo" alt="艾恩国际医疗咨询" />
+        <button className="brand-link" onClick={() => onNavigate('home')} aria-label="返回首页">
+          <img src={logo} className="brand-logo" alt="艾恩国际医疗咨询" />
+        </button>
         <div className="header-actions">
-          <span>♧ 患者流程</span>
-          <span>♧ IMDOC</span>
+          <button className="header-text-action" onClick={() => onNavigate('patientJourney')}>♧ 患者流程</button>
+          <button className="header-text-action" onClick={() => onNavigate('imdoc')}>♧ IMDOC</button>
           <button aria-label="搜索" onClick={() => onNavigate('search')}>⌕</button>
           <span>🇨🇳 CH⌄</span>
         </div>
       </header>
       <nav className="main-nav">
-        {navigationItems.map((item, index) => (
+        {navigationItems.map(item => (
           <button
-            key={item}
-            className={page === 'diseases' && index === 5 ? 'active' : ''}
-            onClick={() => index === 5 && onNavigate('diseases')}
+            key={item.page}
+            className={page === item.page ? 'active' : ''}
+            onClick={() => onNavigate(item.page)}
           >
-            {item}
+            {item.label}
           </button>
         ))}
       </nav>

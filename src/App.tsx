@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react'
 import { DiseaseSearchPage } from './pages/DiseaseSearchPage'
 import { SearchPage } from './pages/SearchPage'
 import { TreatmentPlannerPage } from './pages/TreatmentPlannerPage'
-import type { Page } from './types/routes'
+import { PendingPage } from './pages/PendingPage'
+import { getPageFromPath, pagePaths, type Page } from './types/routes'
 import './App.css'
 import './planner.css'
 
 function initialPage(): Page {
-  if (window.location.pathname.startsWith('/diseases')) return 'diseases'
-  if (window.location.pathname.startsWith('/planner')) return 'planner'
-  return 'search'
+  return getPageFromPath(window.location.pathname)
 }
 
 function App() {
@@ -20,15 +19,15 @@ function App() {
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
   const navigate = (next: Page) => {
-    const path = next === 'diseases' ? '/diseases' : next === 'planner' ? '/planner' : '/search'
-    window.history.pushState({}, '', path)
+    window.history.pushState({}, '', pagePaths[next])
     setPage(next)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   if (page === 'diseases') return <DiseaseSearchPage onNavigate={navigate} />
   if (page === 'planner') return <TreatmentPlannerPage onNavigate={navigate} />
-  return <SearchPage onNavigate={navigate} />
+  if (page === 'search') return <SearchPage onNavigate={navigate} />
+  return <PendingPage page={page} onNavigate={navigate} />
 }
 
 export default App

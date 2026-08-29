@@ -12,7 +12,7 @@ export function SearchPage({ onNavigate }: { onNavigate: (page: Page) => void })
   return (
     <div className="page search-page">
       <div className="search-shell">
-        <button className="close" aria-label="关闭">×</button>
+        <button className="close" aria-label="关闭" onClick={() => onNavigate('home')}>×</button>
         <div className="search-title-row">
           <input autoFocus value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => event.key === 'Enter' && submit()} placeholder="在此搜索" />
           <button onClick={() => submit()} aria-label="提交搜索">⌕</button>
