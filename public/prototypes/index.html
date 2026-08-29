@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>设计原型对比</title>
+  <style>
+    body{margin:0;padding:32px;background:#f5f6fa;color:#2b2c6c;font-family:Arial,"Microsoft YaHei",sans-serif}
+    h1{margin:0 0 8px;font-size:28px}p{color:#6f738c}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;max-width:1400px}
+    figure{margin:0;background:#fff;border:1px solid #e5e7ef;border-radius:8px;padding:16px;box-shadow:0 6px 22px #20234f12}
+    figcaption{font-weight:600;margin-bottom:12px}img{display:block;width:100%;height:auto;border:1px solid #eef0f5}
+    a{color:#1a9f90;text-decoration:none;font-size:13px}@media(max-width:800px){body{padding:20px}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <h1>设计原型对比</h1>
+  <p>左侧（原型图）可与实现页面分别打开：<a href="/search" target="_blank">搜索实现</a> · <a href="/diseases" target="_blank">疾病检索实现</a> · <a href="/planner" target="_blank">治疗路径规划实现</a></p>
+  <div class="grid">
+    <figure><figcaption>搜索 · Lanhu 原型</figcaption><img src="./search.png" alt="搜索页面原型"></figure>
+    <figure><figcaption>检索疾病和状况 · Lanhu 原型</figcaption><img src="./disease-search.png" alt="疾病检索页面原型"></figure>
+  </div>
+</body>
+</html>
