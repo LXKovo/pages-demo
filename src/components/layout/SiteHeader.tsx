@@ -1,5 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import chinaIcon from '../../assets/lanhu/china.png'
+import imdocIcon from '../../assets/lanhu/imdoc.png'
 import logo from '../../assets/lanhu/logo.png'
+import patientJourneyIcon from '../../assets/lanhu/patient-journey.png'
+import searchIcon from '../../assets/lanhu/search.png'
 import { navigationItems } from '../../data/siteData'
 import { getPageFromPath, pagePaths } from '../../types/routes'
 import './SiteHeader.css'
@@ -22,10 +26,23 @@ export function SiteHeader() {
           <img src={logo} className="brand-logo" alt="艾恩国际医疗咨询" />
         </button>
         <div className="header-actions">
-          <button className="header-text-action" onClick={() => navigate(pagePaths.patientJourney)}>♧ 患者流程</button>
-          <button className="header-text-action" onClick={() => navigate(pagePaths.imdoc)}>♧ IMDOC</button>
-          <button aria-label="搜索" onClick={() => navigate(pagePaths.search)}>⌕</button>
-          <span>🇨🇳 CH⌄</span>
+          <button className="header-text-action" onClick={() => navigate(pagePaths.patientJourney)}>
+            <img src={patientJourneyIcon} width="36" height="36" alt="" />
+            <span>患者流程</span>
+          </button>
+          <button className="header-text-action" onClick={() => navigate(pagePaths.imdoc)}>
+            <img src={imdocIcon} width="36" height="36" alt="" />
+            <span>IMDOC</span>
+          </button>
+          <button className="header-text-action" aria-label="搜索" onClick={() => navigate(pagePaths.search)}>
+            <img src={searchIcon} width="36" height="36" alt="" />
+            <span>搜索</span>
+          </button>
+          <button className="header-language" type="button" aria-label="切换语言">
+            <img src={chinaIcon} width="30" height="20" alt="" />
+            <span>CH</span>
+            <i aria-hidden="true" />
+          </button>
         </div>
       </header>
       <nav className="main-nav">

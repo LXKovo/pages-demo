@@ -4,8 +4,8 @@ import { pagePaths, type Page } from './types/routes'
 import './App.css'
 import './planner.css'
 
-const DiseaseSearchPage = lazy(() =>
-  import('./pages/DiseaseSearchPage').then(m => ({ default: m.DiseaseSearchPage }))
+const DiseaseTreatmentPage = lazy(() =>
+  import('./pages/DiseaseTreatmentPage').then(m => ({ default: m.DiseaseTreatmentPage }))
 )
 const TreatmentPlannerPage = lazy(() =>
   import('./pages/TreatmentPlannerPage').then(m => ({ default: m.TreatmentPlannerPage }))
@@ -38,7 +38,7 @@ function App() {
       <ScrollToTop />
       <Suspense fallback={<PageLoading />}>
         <Routes>
-          <Route path={pagePaths.diseases} element={<DiseaseSearchPage />} />
+          <Route path={pagePaths.diseases} element={<DiseaseTreatmentPage />} />
           <Route path={pagePaths.planner} element={<TreatmentPlannerPage />} />
           <Route path={pagePaths.search} element={<SearchPage />} />
           {PENDING_PAGES.map(page => (

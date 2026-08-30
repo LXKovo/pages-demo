@@ -1,1 +1,12 @@
-:root{font-synthesis:none;text-rendering:optimizeLegibility}html{background:#fff}body{min-width:320px}
+@import "tailwindcss";
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+html {
+  background: #fff;
+}
+body {
+  min-width: 320px;
+}
