@@ -38,7 +38,7 @@ export function SiteHeader() {
             <img src={searchIcon} width="36" height="36" alt="" />
             <span>搜索</span>
           </button>
-          <button className="header-language" type="button" aria-label="切换语言">
+          <button className="header-language" type="button" aria-label="切换语言" title="多语言即将上线">
             <img src={chinaIcon} width="30" height="20" alt="" />
             <span>CH</span>
             <i aria-hidden="true" />

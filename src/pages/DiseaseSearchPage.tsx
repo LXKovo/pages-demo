@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { DiseaseModal } from '../components/diseases/DiseaseModal'
 import { SiteFooter } from '../components/layout/SiteFooter'
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { alphabet, bodyDiseases, bodyTabs } from '../data/siteData'
 
 export function DiseaseSearchPage() {
-  const [query, setQuery] = useState('')
+  const [searchParams] = useSearchParams()
+  const [query, setQuery] = useState(searchParams.get('q') ?? '')
   const [tab, setTab] = useState(bodyTabs[0])
   const [letter, setLetter] = useState('S')
   const [selected, setSelected] = useState<string | null>(null)

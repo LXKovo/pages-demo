@@ -2,6 +2,17 @@ import type { Page } from '../types/routes'
 
 export const hotSearches = ['肿瘤与癌症', '神经系统疾病', '血液与免疫系统疾病', '肺癌', '肝癌', '结直肠癌', '脑瘤', '胰腺癌', '黑色素瘤']
 
+// 热门搜索拆分为「分类 + 疾病」两组（搜索页使用）
+export const searchCategories = hotSearches.slice(0, 3)
+export const searchDiseases = hotSearches.slice(3)
+
+// 寻找治疗方法页的热门标签（3 行）
+export const plannerChips = [
+  searchDiseases.slice(0, 3),
+  searchDiseases.slice(3),
+  ['CAR-T', '癌症免疫疗法', '骨髓移植'],
+] as const
+
 export const bodyTabs = ['癌症与肿瘤', '心血管疾病', '神经系统疾病', '血液与免疫疾病', '骨科与运动系统', '儿童专科', '罕见病与综合']
 
 export const bodyDiseases = ['肺癌', '结直肠癌', '乳腺癌', '胃癌', '脑瘤', '肝癌', '肾癌', '胆管癌', '肉瘤', '淋巴瘤', '白血病', '骨髓瘤', '膀胱癌', '宫颈癌', '卵巢癌', '子宫癌', '黑色素瘤', '头颈癌', '鼻咽癌', '口腔癌', '甲状腺癌', '胶质瘤', '视网膜母细胞瘤', '神经母细胞瘤', '视神经胶质瘤', '尤文氏肉瘤', '横纹肌肉瘤', '间皮瘤', '室管膜肿瘤', '骨肉瘤']
@@ -30,6 +41,9 @@ export const pendingPageContent: Partial<Record<Page, { title: string; descripti
   appointment: { title: '预约服务', description: '提交基本需求后，专业医学顾问将与您联系并协助制定下一步方案。', eyebrow: 'BOOK A CONSULTATION' },
   patientJourney: { title: '患者流程', description: '了解从首次咨询、医学评估到海外诊疗及后续随访的服务流程。', eyebrow: 'PATIENT JOURNEY' },
   imdoc: { title: 'IMDOC 医疗协作', description: '面向患者与医学顾问的跨境医疗信息协作服务。', eyebrow: 'IMDOC' },
+  news: { title: '新闻版块', description: '公司动态、全球专家访谈、多国看病指南、日本体检指南与医学前沿资讯。', eyebrow: 'NEWS & INSIGHTS' },
+  hospitalNews: { title: '全球医院动态', description: '来自美国、英国、日本、中国合作医院的最新动态与远程会诊案例。', eyebrow: 'HOSPITAL NEWS' },
+  medicalGuide: { title: '海外医疗资讯与指南', description: '美国、英国、日本看病指南，海外体检与全球就医实用信息。', eyebrow: 'MEDICAL GUIDE' },
 }
 
 export const plannerGoals = ['寻找治疗方案', '获取第二诊疗意见', '预约远程会诊', '了解临床试验']

@@ -61,6 +61,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 | doctors | `/doctors` | PendingPage（设计稿 16 全球医生 / 7 找医生） |
 | hospitals | `/hospitals` | PendingPage（设计稿 33 医院 / 6 找医院） |
 | diseases | `/diseases` | ✅ DiseaseTreatmentPage（设计稿 22 疾病与治疗） |
+| diseaseSearch | `/disease-search` | ✅ DiseaseSearchPage（设计稿 15 检索疾病和状况，支持 `?q=` 关键词） |
 | cases | `/cases` | PendingPage（设计稿 17 成功案例） |
 | about | `/about` | PendingPage（关于我们） |
 | search | `/search` | ✅ SearchPage（设计稿 8 搜索） |
@@ -68,18 +69,22 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 | appointment | `/appointment` | PendingPage（预约服务落地） |
 | patientJourney | `/patient-journey` | PendingPage（患者流程） |
 | imdoc | `/imdoc` | PendingPage（IMDOC 医疗协作） |
+| news | `/news` | PendingPage（设计稿 18 新闻版块） |
+| hospitalNews | `/hospital-news` | PendingPage（设计稿 11 全球医院动态） |
+| medicalGuide | `/medical-guide` | PendingPage（设计稿 12 海外医疗资讯与指南） |
 
 ---
 
 ## 3. 34 页设计稿 ↔ 路由映射与进度矩阵
 
-### 3.1 已实现（3 页）
+### 3.1 已实现（4 页）
 
 | 设计稿 | 页面 | 路由 | 实现方式 |
 | --- | --- | --- | --- |
 | 22 | 疾病与治疗 | `/diseases` | 整图（1920×8033）+ 透明热区按钮：导航 15 区 + 内容锚点 6 区 + 表单输入覆盖（姓名/电话/病情简述/提交） |
 | 5 | 寻找治疗方法 | `/planner` | planner-artboard：标题 + 搜索框 + 热门搜索 chips（3 行 9 词） |
 | 8 | 搜索 | `/search` | search-artboard：搜索框 + 热门搜索（3 分类 + 6 疾病） |
+| 15 | 检索疾病和状况 | `/disease-search` | 组件化检索页：搜索 + 身体系统 tabs + 字母索引 + 疾病弹窗；支持 `?q=` URL 参数（搜索/寻找治疗方法页提交后带词跳转） |
 
 ### 3.2 待开发（31 页）—— 按优先级分批
 
@@ -91,7 +96,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 | 17 | 成功案例 | `/cases` | 列表页 | P0 | ⬜ |
 | 19 | 疾病和状况 | `/diseases` | 疾病列表 | P0 | ⬜ |
 | 10 | 肺癌概述 | `/diseases/*` | 疾病详情 | P0 | ⬜ |
-| 15 | 检索疾病和状况 | `/diseases` | 工具页 | P0 | ⬜ |
+| 15 | 检索疾病和状况 | `/disease-search` | 工具页 | P0 | ✅ |
 | 14 | 疾病中心图标 | `/diseases` | 中心导航 | P0 | ⬜ |
 | 13 | 全球疾病治疗指南 | `/planner` | 列表页 | P1 | ⬜ |
 | 4 | 治疗药物 | `/diseases` | 列表页 | P1 | ⬜ |
@@ -119,7 +124,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 | 12 | 海外医疗资讯与指南 | 资讯区 | 资讯列表 | P3 | ⬜ |
 | 2 | 常见问题 | `/about` | 内容列表 | P4 | ⬜ |
 
-> 注：资讯类页面（新闻版块/新闻详情/全球医院动态/海外医疗资讯与指南）当前在 Footer「有用信息 / 健康图书馆」中以文本链接形式存在，尚未建立独立路由；建议后续在 `pagePaths` 中新增资讯区路由组。
+> 注：资讯类页面（新闻版块/新闻详情/全球医院动态/海外医疗资讯与指南）已建立独立路由占位（`/news`、`/hospital-news`、`/medical-guide`），Footer「有用信息 / 健康图书馆 / 全球医院」链接已可点击跳转；内容落地仍需按列表页模板实现。
 
 ---
 
@@ -127,7 +132,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 
 ### 4.1 疾病与治疗（DiseaseTreatmentPage）—— 整图 + 热区方案
 
-- 使用设计稿整图 `assets/lanhu/disease-treatment/design.png`（1920×8033）作为画布；
+- 使用设计稿整图 `assets/lanhu/disease-treatment/design.webp`（1920×8033，sharp 压缩替代 5.7MB 原始 png）作为画布；
 - 容器 `aspect-1920/8033` + `w-[1920px] max-w-full` 实现等比缩放；
 - **navigationZones**（15 个透明按钮）：utility-bar 4 区 + 主导航 8 区 + 右上 3 区（患者流程/IMDOC/搜索），按设计稿像素坐标 `(left, top, width, height)` 映射为百分比，点击跳转对应路由；
 - **contentZones**（6 个锚点按钮）：治疗方案 / 推荐医院 / 权威专家 / 治疗药物 / 服务案例 / 治疗资讯，点击平滑滚动到设计稿 Y 坐标；
@@ -143,7 +148,13 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 ### 4.3 搜索（SearchPage）
 
 - search-artboard：大搜索图标 + 输入框（Enter 或按钮提交）+ 热门搜索分类列表；
-- 搜索提交跳转 `/diseases`。
+- 搜索提交带词跳转 `/disease-search?q=xxx`（与寻找治疗方法页一致）。
+
+### 4.4 检索疾病和状况（DiseaseSearchPage）
+
+- 组件化检索页：`?q=` URL 参数初始化搜索词 + 身体系统 tabs + 疾病网格 + 字母索引 + 疾病详情弹窗（DiseaseModal）；
+- 数据来自 `siteData`（`bodyTabs` / `bodyDiseases` / `alphabet`）；
+- 路由 `/disease-search`，导航高亮归属「疾病与治疗」（`getPageFromPath` 分组映射）。
 
 ---
 

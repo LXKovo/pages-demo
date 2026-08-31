@@ -1,8 +1,28 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { pagePaths, type Page } from './types/routes'
+import { getPageFromPath, pagePaths, type Page } from './types/routes'
 import './App.css'
 import './planner.css'
+
+const PAGE_TITLES: Record<Page, string> = {
+  home: '艾恩国际医疗 · IM Medical International',
+  overseas: '出国就医 · 艾恩国际医疗',
+  services: '我们的服务 · 艾恩国际医疗',
+  doctors: '全球医生 · 艾恩国际医疗',
+  hospitals: '合作医院 · 艾恩国际医疗',
+  diseases: '疾病与治疗 · 艾恩国际医疗',
+  diseaseSearch: '检索疾病和状况 · 艾恩国际医疗',
+  cases: '服务案例 · 艾恩国际医疗',
+  about: '关于我们 · 艾恩国际医疗',
+  search: '搜索 · 艾恩国际医疗',
+  planner: '寻找治疗方法 · 艾恩国际医疗',
+  appointment: '预约服务 · 艾恩国际医疗',
+  patientJourney: '患者流程 · 艾恩国际医疗',
+  imdoc: 'IMDOC 医疗协作 · 艾恩国际医疗',
+  news: '新闻版块 · 艾恩国际医疗',
+  hospitalNews: '全球医院动态 · 艾恩国际医疗',
+  medicalGuide: '海外医疗资讯与指南 · 艾恩国际医疗',
+}
 
 const DiseaseTreatmentPage = lazy(() =>
   import('./pages/DiseaseTreatmentPage').then(m => ({ default: m.DiseaseTreatmentPage }))
@@ -13,11 +33,14 @@ const TreatmentPlannerPage = lazy(() =>
 const SearchPage = lazy(() =>
   import('./pages/SearchPage').then(m => ({ default: m.SearchPage }))
 )
+const DiseaseSearchPage = lazy(() =>
+  import('./pages/DiseaseSearchPage').then(m => ({ default: m.DiseaseSearchPage }))
+)
 const PendingPage = lazy(() =>
   import('./pages/PendingPage').then(m => ({ default: m.PendingPage }))
 )
 
-const REAL_PAGES: Page[] = ['diseases', 'planner', 'search']
+const REAL_PAGES: Page[] = ['diseases', 'planner', 'search', 'diseaseSearch']
 const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PAGES.includes(page))
 
 function PageLoading() {
@@ -26,9 +49,11 @@ function PageLoading() {
 
 function ScrollToTop() {
   const { pathname } = useLocation()
+  const page = getPageFromPath(pathname)
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [pathname])
+    document.title = PAGE_TITLES[page]
+  }, [pathname, page])
   return null
 }
 
@@ -41,6 +66,7 @@ function App() {
           <Route path={pagePaths.diseases} element={<DiseaseTreatmentPage />} />
           <Route path={pagePaths.planner} element={<TreatmentPlannerPage />} />
           <Route path={pagePaths.search} element={<SearchPage />} />
+          <Route path={pagePaths.diseaseSearch} element={<DiseaseSearchPage />} />
           {PENDING_PAGES.map(page => (
             <Route key={page} path={pagePaths[page]} element={<PendingPage page={page} />} />
           ))}

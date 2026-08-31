@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import design from "../assets/lanhu/disease-treatment/design.png";
+import design from "../assets/lanhu/disease-treatment/design.webp";
+import { Toast } from "../components/common/Toast";
 import { pagePaths, type Page } from "../types/routes";
 
 const navigationZones: Array<{
@@ -141,6 +143,17 @@ const zoneStyle = (
 
 export function DiseaseTreatmentPage() {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [brief, setBrief] = useState("");
+  const [toast, setToast] = useState<string | null>(null);
+
+  // toast 自动消失
+  useEffect(() => {
+    if (!toast) return;
+    const timer = window.setTimeout(() => setToast(null), 3000);
+    return () => window.clearTimeout(timer);
+  }, [toast]);
 
   const scrollToDesignY = (top: number) => {
     const canvas = document.getElementById("disease-treatment-canvas");
@@ -149,6 +162,17 @@ export function DiseaseTreatmentPage() {
       top: canvas.offsetTop + (canvas.clientWidth / 1920) * top,
       behavior: "smooth",
     });
+  };
+
+  const handleSubmit = () => {
+    if (!name.trim() || !phone.trim()) {
+      setToast("请填写姓名和联系电话后再提交");
+      return;
+    }
+    setToast("已收到您的需求，专业医学顾问将在 24 小时内联系您");
+    setName("");
+    setPhone("");
+    setBrief("");
   };
 
   return (
@@ -192,6 +216,8 @@ export function DiseaseTreatmentPage() {
           style={zoneStyle(240, 7065, 380, 50)}
           aria-label="您的姓名"
           placeholder="您的姓名"
+          value={name}
+          onChange={event => setName(event.target.value)}
         />
         <input
           className="absolute z-10 border-0 bg-transparent px-[0.8%] text-[clamp(4.5px,0.9375vw,18px)] text-[rgba(51,51,51,1)] outline-none placeholder:text-transparent"
@@ -199,20 +225,26 @@ export function DiseaseTreatmentPage() {
           aria-label="联系电话"
           placeholder="联系电话"
           inputMode="tel"
+          value={phone}
+          onChange={event => setPhone(event.target.value)}
         />
         <textarea
           className="absolute z-10 resize-none border-0 bg-transparent px-[0.8%] py-[0.5%] text-[clamp(4.5px,0.9375vw,18px)] text-[rgba(51,51,51,1)] outline-none placeholder:text-transparent"
           style={zoneStyle(240, 7135, 772, 80)}
           aria-label="病情简述"
           placeholder="病情简述"
+          value={brief}
+          onChange={event => setBrief(event.target.value)}
         />
         <button
           type="button"
           className="absolute z-10 cursor-pointer bg-transparent focus-visible:outline-2 focus-visible:outline-[rgba(255,255,255,1)]"
           style={zoneStyle(240, 7251, 260, 60)}
           aria-label="立即提交"
+          onClick={handleSubmit}
         />
       </div>
+      {toast && <Toast message={toast} variant={toast.startsWith("请") ? "error" : "success"} />}
     </main>
   );
 }
