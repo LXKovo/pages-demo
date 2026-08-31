@@ -1,21 +1,21 @@
-import consultationImage from '../../assets/远程问诊页面.png'
 import logo from '../../assets/lanhu/logo.png'
+import consultBg from '../../assets/lanhu/planner/consult-bg.png'
 
 export function SiteFooter() {
   return (
     <>
       <section className="consult-banner">
-        <div className="consult-copy">
-          <h2>免费获取全球就医<span>评估方案</span></h2>
+        <img className="consult-bg" src={consultBg} alt="" />
+        <div className="consult-heading">
+          <h2><span>免费获取全球就医</span><span>评估方案</span></h2>
           <p>专业医学顾问将在24小时内联系您</p>
-          <div className="consult-fields">
-            <input placeholder="您的姓名" />
-            <input placeholder="联系电话" />
-            <textarea placeholder="病情简述" />
-          </div>
-          <button>立即提交</button>
         </div>
-        <img src={consultationImage} alt="医疗咨询" />
+        <div className="consult-fields-row">
+          <input placeholder="您的姓名" aria-label="您的姓名" />
+          <input placeholder="联系电话" aria-label="联系电话" inputMode="tel" />
+        </div>
+        <textarea className="consult-brief" placeholder="病情简述" aria-label="病情简述" />
+        <button className="consult-submit" type="button">立即提交</button>
       </section>
       <footer className="footer">
         <div className="footer-inner">
