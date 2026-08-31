@@ -2,7 +2,7 @@
 
 > IM Medical International 艾恩国际医疗 —— 跨境医疗官网
 > 文档版本：v1.0 · 2026-08-31
-> 状态说明：当前已实现 3 个真实页面，其余 31 页为 PendingPage 占位。
+> 状态说明：当前已实现 5 个真实页面（首页 / 疾病与治疗 / 寻找治疗方法 / 搜索 / 检索疾病和状况），其余 29 页为 PendingPage 占位。
 
 ---
 
@@ -32,6 +32,7 @@ src/
 │   ├── layout/                # SiteHeader（utility-bar + header + main-nav）、SiteFooter（consult-banner + footer）
 │   └── diseases/              # DiseaseModal（疾病弹窗）
 └── pages/
+    ├── HomePage.tsx / .css        # ✅ 首页（10 个 artboard 区块，HomePage.css）
     ├── DiseaseTreatmentPage.tsx   # ✅ 疾病与治疗（整图 + 热区方案）
     ├── TreatmentPlannerPage.tsx   # ✅ 寻找治疗方法（planner-artboard）
     ├── SearchPage.tsx             # ✅ 搜索（search-artboard）
@@ -41,7 +42,7 @@ src/
 ### 1.3 路由装配逻辑（App.tsx）
 
 ```ts
-const REAL_PAGES: Page[] = ['diseases', 'planner', 'search']
+const REAL_PAGES: Page[] = ['home', 'diseases', 'planner', 'search', 'diseaseSearch']
 const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PAGES.includes(page))
 ```
 
@@ -55,7 +56,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 
 | Page | 路径 | 现状 |
 | --- | --- | --- |
-| home | `/` | PendingPage 占位（设计稿 9 首页） |
+| home | `/` | ✅ HomePage（设计稿 9 首页，10 artboard 区块） |
 | overseas | `/overseas-care` | PendingPage（设计稿 31 出国就医） |
 | services | `/services` | PendingPage（我们的服务总览） |
 | doctors | `/doctors` | PendingPage（设计稿 16 全球医生 / 7 找医生） |
@@ -77,10 +78,11 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 
 ## 3. 34 页设计稿 ↔ 路由映射与进度矩阵
 
-### 3.1 已实现（4 页）
+### 3.1 已实现（5 页）
 
 | 设计稿 | 页面 | 路由 | 实现方式 |
 | --- | --- | --- | --- |
+| 9 | 首页 | `/` | HomePage artboard 还原：1920×9781 切 10 区块（hero / 关于+数据 / 核心服务 / 疾病入口 / 医生 / 医院 / 案例 / 资讯 / FAQ / 流程），首尾复用 SiteHeader/SiteFooter；图片本地化到 `src/assets/lanhu/home/`（34 PNG + hero-bg.jpg）；疾病入口带词跳转 `/disease-search?q=xxx` |
 | 22 | 疾病与治疗 | `/diseases` | 整图（1920×8033）+ 透明热区按钮：导航 15 区 + 内容锚点 6 区 + 表单输入覆盖（姓名/电话/病情简述/提交） |
 | 5 | 寻找治疗方法 | `/planner` | planner-artboard：标题 + 搜索框 + 热门搜索 chips（3 行 9 词） |
 | 8 | 搜索 | `/search` | search-artboard：搜索框 + 热门搜索（3 分类 + 6 疾病） |
@@ -92,7 +94,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 
 | # | 设计稿页名 | 归属路由 | 类型 | 优先级 | 状态 |
 | --- | --- | --- | --- | --- | --- |
-| 9 | 首页 | `/` | 首页 | P0 | ⬜ |
+| 9 | 首页 | `/` | 首页 | P0 | ✅（见 3.1） |
 | 17 | 成功案例 | `/cases` | 列表页 | P0 | ⬜ |
 | 19 | 疾病和状况 | `/diseases` | 疾病列表 | P0 | ⬜ |
 | 10 | 肺癌概述 | `/diseases/*` | 疾病详情 | P0 | ⬜ |
@@ -155,6 +157,15 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 - 组件化检索页：`?q=` URL 参数初始化搜索词 + 身体系统 tabs + 疾病网格 + 字母索引 + 疾病详情弹窗（DiseaseModal）；
 - 数据来自 `siteData`（`bodyTabs` / `bodyDiseases` / `alphabet`）；
 - 路由 `/disease-search`，导航高亮归属「疾病与治疗」（`getPageFromPath` 分组映射）。
+
+### 4.5 首页（HomePage）—— artboard 分块还原
+
+- 设计稿 1920×9781 超长画布，按设计稿 `group_*` 定位重算为 10 个 `home-block`（每个 `width:1920px; max-width:100%; aspect-ratio; margin:0 auto; overflow:hidden`），等高缩放保证整页视觉比例；
+- 区块高度比例：hero 1920/930 · 关于+数据 1920/530 · 核心服务 1920/847 · 疾病入口 1920/500 · 医生 1920/1100 · 医院 1920/855 · 案例 1920/805 · 资讯 1920/682 · FAQ 1920/741 · 流程 1920/760；
+- 区块内元素绝对定位百分比 + `clamp(min, px/1920*vw, max)` 字号，适配常见视口不破版；
+- 复用全局 `SiteHeader` / `SiteFooter`（咨询表单与页脚由 SiteFooter 承担，避免与设计稿 box_30/box_31 重复）；
+- 交互：hero 4 按钮跳转（appointment/hospitals/services/services）；8 疾病图标——7 病种带词跳 `/disease-search?q=xxx`（DiseaseSearchPage 通过 `useSearchParams` 读取预填），「更多」跳 `/diseases`；各分区「了解更多」teal 胶囊跳对应列表页；资讯卡跳 `/medical-guide`；
+- 样式集中在 `src/pages/HomePage.css`，复用 `--color-*` 设计 token（navy/magenta/teal/gray 灰阶），未在组件内硬编码色值。
 
 ---
 

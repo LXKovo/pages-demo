@@ -1,0 +1,913 @@
+/* 首页 — 基于蓝湖设计稿 1920×9781 画布分块重建 */
+.home-page {
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* artboard 分块：每块等比缩放（1920 基准，max-width:100% 时宽度收窄、高度按比例收缩） */
+.home-block {
+  position: relative;
+  margin: 0 auto;
+  width: 1920px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.home-font {
+  font-family: "Source Han Sans CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* teal 胶囊「了解更多」 */
+.home-more-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4%;
+  height: 45px;
+  padding: 0 3%;
+  border: 0;
+  border-radius: 100px;
+  background: var(--color-teal);
+  color: #fff;
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.home-more-pill img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* 各分区「了解更多」teal 胶囊 */
+.home-doctors-more,
+.home-hospitals-more,
+.home-cases-more,
+.home-news-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4%;
+  height: 45px;
+  padding: 0 3%;
+  border: 0;
+  border-radius: 100px;
+  background: var(--color-teal);
+  color: #fff;
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 3px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.home-doctors-more img,
+.home-hospitals-more img,
+.home-cases-more img,
+.home-news-more img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* ---------- Hero（930） ---------- */
+.home-hero {
+  aspect-ratio: 1920 / 930;
+}
+.home-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-hero-title {
+  position: absolute;
+  left: 21.35%;
+  top: 33.66%;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(23px, 3.646vw, 70px);
+  font-weight: 500;
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+.home-hero-sub {
+  position: absolute;
+  left: 25.31%;
+  top: 47.74%;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(11px, 1.667vw, 32px);
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+.home-hero-cover {
+  position: absolute;
+  left: 34.69%;
+  top: 55.91%;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(8px, 1.25vw, 24px);
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+.home-hero-btns {
+  position: absolute;
+  left: 18.7%;
+  top: 88.17%;
+  display: flex;
+  width: 62.5%;
+  height: 7.53%;
+}
+.home-hero-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+  border: 0;
+  cursor: pointer;
+  color: rgba(43, 44, 108, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 3px;
+  white-space: nowrap;
+}
+.home-hero-btn-1 { background: rgba(250, 250, 255, 1); border-radius: 100px 0 0 100px; }
+.home-hero-btn-2 { background: rgba(243, 247, 255, 1); }
+.home-hero-btn-3 { background: rgba(229, 238, 255, 1); }
+.home-hero-btn-4 { background: rgba(240, 240, 255, 1); border-radius: 0 100px 100px 0; }
+.home-hero-btn img {
+  position: absolute;
+  right: 6.5%;
+  width: 4.3%;
+  max-width: 30px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+/* ---------- 关于我们 + 数据背书（140→670） ---------- */
+.home-about-stats {
+  aspect-ratio: 1920 / 530;
+}
+.home-about-title {
+  position: absolute;
+  left: 12.5%;
+  top: 0;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  line-height: 1.45;
+  color: var(--color-navy);
+}
+.home-about-title .accent {
+  color: var(--color-magenta);
+}
+.home-about-desc {
+  position: absolute;
+  left: 12.5%;
+  top: 23.4%;
+  width: 74.7%;
+  margin: 0;
+  color: rgba(102, 102, 102, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+  line-height: 2;
+}
+.home-stats {
+  position: absolute;
+  left: 12.7%;
+  top: 38.49%;
+  width: 74.6%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 3.85%;
+  row-gap: 7.55%;
+}
+.home-stat {
+  display: flex;
+  align-items: center;
+  gap: 4%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(164, 172, 171, 0.25);
+  padding: 4.5% 5%;
+}
+.home-stat-icon {
+  flex: none;
+  width: 23.4%;
+  max-width: 100px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.home-stat-num {
+  color: rgba(29, 186, 155, 1);
+  font-size: clamp(9px, 1.354vw, 26px);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.home-stat-label {
+  color: rgba(43, 44, 108, 1);
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.home-stat-desc {
+  margin-top: 3%;
+  color: rgba(113, 113, 125, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+  line-height: 1.5;
+}
+
+/* ---------- 核心服务（793→1640） ---------- */
+.home-services {
+  aspect-ratio: 1920 / 847;
+}
+.home-services-title {
+  position: absolute;
+  left: 12.5%;
+  top: 0;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  line-height: 1.45;
+  color: var(--color-navy);
+}
+.home-services-title .accent {
+  color: var(--color-magenta);
+}
+.home-services-desc {
+  position: absolute;
+  left: 12.5%;
+  top: 8.5%;
+  width: 74.4%;
+  margin: 0;
+  color: rgba(102, 102, 102, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+  line-height: 2;
+}
+.home-services-tags {
+  position: absolute;
+  left: 12.66%;
+  top: 19.84%;
+  display: flex;
+  gap: 1.6%;
+}
+.home-services-tag {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 2.2%;
+  border-radius: 100px;
+  border: 1px solid rgba(148, 148, 158, 1);
+  color: rgba(148, 148, 158, 1);
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 3px;
+  white-space: nowrap;
+}
+.home-services-tag.active {
+  border-color: var(--color-magenta);
+  color: var(--color-magenta);
+}
+.home-services-body {
+  position: absolute;
+  left: 9.11%;
+  top: 28.81%;
+  width: 81.77%;
+  height: 56.67%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3%;
+}
+.home-services-img {
+  flex: none;
+  width: 39.5%;
+  aspect-ratio: 620 / 420;
+  object-fit: cover;
+  margin-top: 3.5%;
+}
+.home-services-text {
+  flex: 1;
+  padding-top: 3.5%;
+}
+.home-services-name {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: clamp(13px, 1.979vw, 38px);
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+.home-services-detail {
+  margin: 6% 0 0;
+  max-width: 600px;
+  color: rgba(113, 113, 125, 1);
+  font-size: clamp(7px, 1.042vw, 20px);
+  letter-spacing: 3px;
+  line-height: 1.9;
+}
+.home-services-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 2%;
+  margin-top: 6%;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-teal);
+  font-size: clamp(5px, 0.781vw, 15px);
+  letter-spacing: 5px;
+}
+.home-services-more img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+.home-services-btns {
+  display: flex;
+  gap: 2.5%;
+  margin-top: 8%;
+}
+.home-services-btn {
+  height: 50px;
+  padding: 0 2.8%;
+  border-radius: 8px;
+  border: 0;
+  cursor: pointer;
+  font-size: clamp(7px, 1.042vw, 20px);
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+.home-services-btn-magenta {
+  background: rgba(230, 49, 125, 1);
+  color: #fff;
+}
+.home-services-btn-outline {
+  background: #fff;
+  border: 1px solid var(--color-navy);
+  color: var(--color-navy);
+}
+
+/* ---------- 疾病与治疗（500） ---------- */
+.home-diseases {
+  aspect-ratio: 1920 / 500;
+}
+.home-diseases-title {
+  position: absolute;
+  left: 46.35%;
+  top: 14%;
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--color-navy);
+  white-space: nowrap;
+}
+.home-diseases-title .accent {
+  color: var(--color-magenta);
+}
+.home-disease-list {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6.46%;
+}
+.home-disease-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12%;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+.home-disease-icon {
+  width: 68px;
+  max-width: 3.54vw;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.home-disease-name {
+  color: rgba(51, 51, 51, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+
+/* ---------- 合作医生（1100，浅灰底） ---------- */
+.home-doctors {
+  aspect-ratio: 1920 / 1100;
+  background: rgba(248, 248, 249, 1);
+}
+.home-doctors-title {
+  position: absolute;
+  left: 12.5%;
+  top: 9.09%;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--color-navy);
+}
+.home-doctors-title .accent {
+  color: var(--color-magenta);
+}
+.home-doctors-sub {
+  position: absolute;
+  left: 12.76%;
+  top: 16.18%;
+  margin: 0;
+  color: rgba(102, 102, 102, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+}
+.home-doctors-more {
+  position: absolute;
+  right: 15.1%;
+  top: 15.55%;
+}
+.home-doctor-grid {
+  position: absolute;
+  left: 12.76%;
+  top: 21.82%;
+  width: 74.48%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.2%;
+}
+.home-doctor-card {
+  display: flex;
+  background: #fff;
+  border-radius: 20px;
+  padding: 4% 3.5%;
+  box-shadow: 0 5px 15px rgba(164, 172, 171, 0.25);
+  cursor: pointer;
+  border: 0;
+  text-align: left;
+}
+.home-doctor-avatar {
+  flex: none;
+  width: 26.4%;
+  max-width: 140px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.home-doctor-info {
+  flex: 1;
+  padding-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.home-doctor-name {
+  margin: 0;
+  color: var(--color-navy);
+  font-size: clamp(8px, 1.25vw, 24px);
+  font-weight: 500;
+}
+.home-doctor-title {
+  margin: 4% 0 0;
+  color: rgba(113, 113, 125, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+}
+.home-doctor-intro {
+  margin: 4% 0 0;
+  color: rgba(102, 102, 102, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+  line-height: 1.6;
+  flex: 1;
+  overflow: hidden;
+}
+.home-doctor-hospital {
+  margin: 4% 0 0;
+  color: rgba(47, 178, 151, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+}
+
+/* ---------- 合作医院（0→855） ---------- */
+.home-hospitals {
+  aspect-ratio: 1920 / 855;
+}
+.home-hospitals-title {
+  position: absolute;
+  left: 12.5%;
+  top: 14.04%;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--color-navy);
+}
+.home-hospitals-title .accent {
+  color: var(--color-magenta);
+}
+.home-hospitals-tags {
+  position: absolute;
+  left: 12.6%;
+  top: 25.15%;
+  display: flex;
+  gap: 1.6%;
+}
+.home-hospitals-tag {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 2.2%;
+  border-radius: 100px;
+  border: 1px solid rgba(148, 148, 158, 1);
+  color: rgba(148, 148, 158, 1);
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 3px;
+  white-space: nowrap;
+}
+.home-hospitals-tag.active {
+  border-color: var(--color-magenta);
+  color: var(--color-magenta);
+}
+.home-hospitals-more {
+  position: absolute;
+  left: 61.6%;
+  top: 30.53%;
+}
+.home-hospital-grid {
+  position: absolute;
+  left: 12.6%;
+  top: 30.53%;
+  width: 74.8%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 3.2%;
+  row-gap: 4.68%;
+}
+.home-hospital-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5% 6%;
+  aspect-ratio: 440 / 142;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 0;
+  text-align: left;
+}
+.home-hospital-card-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-hospital-name {
+  position: relative;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(8px, 1.25vw, 24px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+.home-hospital-rank {
+  position: relative;
+  margin: 4% 0 0;
+  color: #fff;
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---------- 服务案例（0→805） ---------- */
+.home-cases {
+  aspect-ratio: 1920 / 805;
+}
+.home-cases-title {
+  position: absolute;
+  left: 12.5%;
+  top: 14.91%;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--color-navy);
+}
+.home-cases-title .accent {
+  color: var(--color-magenta);
+}
+.home-cases-sub {
+  position: absolute;
+  left: 12.5%;
+  top: 24.22%;
+  margin: 0;
+  color: rgba(113, 113, 125, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 3px;
+}
+.home-cases-more {
+  position: absolute;
+  left: 48.4%;
+  top: 23.35%;
+}
+.home-case-row {
+  position: absolute;
+  left: 12.55%;
+  width: 75.16%;
+  display: flex;
+  gap: 2%;
+}
+.home-case-row-1 {
+  top: 36.65%;
+}
+.home-case-row-2 {
+  top: 70.19%;
+}
+.home-case-card {
+  flex: 1;
+  display: flex;
+  gap: 3.5%;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+.home-case-img {
+  flex: none;
+  width: 34.7%;
+  aspect-ratio: 250 / 240;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.home-case-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.home-case-name {
+  margin: 0;
+  color: rgba(26, 26, 26, 1);
+  font-size: clamp(7px, 1.146vw, 22px);
+  font-weight: 500;
+  letter-spacing: 5px;
+}
+.home-case-meta {
+  display: flex;
+  gap: 4%;
+  margin-top: 4%;
+  color: rgba(77, 77, 77, 1);
+  font-size: clamp(5px, 0.729vw, 14px);
+  letter-spacing: 3px;
+}
+.home-case-hospital {
+  margin-top: 4%;
+  color: rgba(77, 77, 77, 1);
+  font-size: clamp(5px, 0.781vw, 15px);
+  letter-spacing: 3px;
+}
+.home-case-brief {
+  margin-top: 3%;
+  color: rgba(102, 102, 102, 1);
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 5px;
+  line-height: 1.6;
+}
+
+/* ---------- 资讯与指南（0→682） ---------- */
+.home-news {
+  aspect-ratio: 1920 / 682;
+  background: rgba(248, 248, 249, 1);
+}
+.home-news-title {
+  position: absolute;
+  left: 12.5%;
+  top: 17.6%;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--color-navy);
+}
+.home-news-title .accent {
+  color: var(--color-magenta);
+}
+.home-news-more {
+  position: absolute;
+  left: 44.27%;
+  top: 17.6%;
+}
+.home-news-grid {
+  position: absolute;
+  left: 12.71%;
+  top: 34.02%;
+  width: 74.84%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.6%;
+}
+.home-news-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(233, 231, 231, 1);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+.home-news-img {
+  width: 100%;
+  aspect-ratio: 340 / 230;
+  object-fit: cover;
+}
+.home-news-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 6% 7%;
+}
+.home-news-name {
+  margin: 0;
+  color: rgba(51, 51, 51, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  font-weight: 500;
+  letter-spacing: 5px;
+  line-height: 1.6;
+}
+.home-news-excerpt {
+  margin: 5% 0 0;
+  color: rgba(118, 109, 95, 1);
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 5px;
+  line-height: 1.6;
+  flex: 1;
+}
+.home-news-detail {
+  align-self: flex-start;
+  margin-top: 8%;
+  height: 46px;
+  padding: 0 5%;
+  border-radius: 100px;
+  border: 0;
+  background: var(--color-teal);
+  color: #fff;
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* ---------- 常见问题（0→741） ---------- */
+.home-faq {
+  aspect-ratio: 1920 / 741;
+}
+.home-faq-title {
+  position: absolute;
+  left: 12.5%;
+  top: 16.19%;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: var(--color-navy);
+}
+.home-faq-title .accent {
+  color: var(--color-magenta);
+}
+.home-faq-sub {
+  position: absolute;
+  left: 12.5%;
+  top: 26.32%;
+  margin: 0;
+  color: rgba(113, 113, 125, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+}
+.home-faq-item {
+  position: absolute;
+  left: 12.81%;
+  width: 74.22%;
+  background: rgba(248, 248, 249, 1);
+  border-radius: 16px;
+}
+.home-faq-open {
+  top: 37.65%;
+  padding: 3.5% 4%;
+}
+.home-faq-q {
+  margin: 0;
+  color: rgba(51, 51, 51, 1);
+  font-size: clamp(8px, 1.25vw, 24px);
+  font-weight: 500;
+  letter-spacing: 5px;
+}
+.home-faq-a {
+  margin: 4% 0 0;
+  color: rgba(102, 102, 102, 1);
+  font-size: clamp(6px, 0.9375vw, 18px);
+  letter-spacing: 5px;
+  line-height: 1.7;
+}
+.home-faq-closed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.8% 4%;
+  aspect-ratio: 1425 / 74;
+}
+.home-faq-closed .home-faq-q {
+  font-size: clamp(7px, 1.146vw, 22px);
+}
+.home-faq-arrow {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex: none;
+}
+.home-faq-closed-2 { top: 56.54%; }
+.home-faq-closed-3 { top: 67.88%; }
+.home-faq-closed-4 { top: 79.22%; }
+.home-faq-more {
+  position: absolute;
+  left: 12.81%;
+  top: 93.25%;
+  margin: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-navy);
+  font-size: clamp(7px, 1.042vw, 20px);
+  letter-spacing: 3px;
+}
+
+/* ---------- 服务流程（760，深蓝底） ---------- */
+.home-process {
+  aspect-ratio: 1920 / 760;
+  background: rgba(4, 39, 105, 1);
+}
+.home-process-title {
+  position: absolute;
+  left: 12.5%;
+  top: 9.21%;
+  margin: 0;
+  font-size: clamp(12px, 1.875vw, 36px);
+  font-weight: 700;
+  letter-spacing: 5px;
+  color: #fff;
+}
+.home-process-title .accent {
+  color: var(--color-teal);
+}
+.home-process-row {
+  position: absolute;
+  left: 11.2%;
+  width: 77.6%;
+  display: flex;
+  justify-content: space-between;
+}
+.home-process-row-1 { top: 25.66%; }
+.home-process-row-2 { top: 56.05%; }
+.home-process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 24%;
+}
+.home-process-icon {
+  width: 95px;
+  max-width: 4.95vw;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.home-process-name {
+  margin: 6% 0 0;
+  color: #fff;
+  font-size: clamp(7px, 1.146vw, 22px);
+  font-weight: 500;
+  letter-spacing: 5px;
+  white-space: nowrap;
+}
+.home-process-desc {
+  margin: 4% 0 0;
+  color: #fff;
+  font-size: clamp(5px, 0.833vw, 16px);
+  letter-spacing: 5px;
+  line-height: 1.6;
+  text-align: center;
+}

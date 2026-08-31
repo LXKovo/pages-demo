@@ -8,8 +8,8 @@
 
 | 状态 | 页面 | 数量 |
 | --- | --- | --- |
-| ✅ 已实现真实页面 | 搜索、疾病与治疗、治疗路径规划、检索疾病和状况 | 4 |
-| 🧩 已接通路由（PendingPage 占位） | 首页、出国就医、我们的服务、全球医生、合作医院、服务案例、关于我们、预约服务、患者流程、IMDOC、新闻版块、全球医院动态、海外医疗资讯与指南 | 13 |
+| ✅ 已实现真实页面 | 首页、搜索、疾病与治疗、治疗路径规划、检索疾病和状况 | 5 |
+| 🧩 已接通路由（PendingPage 占位） | 出国就医、我们的服务、全球医生、合作医院、服务案例、关于我们、预约服务、患者流程、IMDOC、新闻版块、全球医院动态、海外医疗资讯与指南 | 12 |
 
 全部 34 页的逐页明细见 [docs/UI.md](docs/UI.md)，进度矩阵见 [docs/tasks.md](docs/tasks.md)。
 
@@ -17,6 +17,7 @@
 
 | 页面 | 路由 | 主要功能 |
 | --- | --- | --- |
+| 首页 | `/` | 蓝湖设计稿（1920×9781）切 10 个 artboard 区块：hero 四按钮 / 数据背书 / 核心服务 / 疾病入口 / 医生 / 医院 / 案例 / 资讯 / FAQ / 服务流程；疾病图标带词跳疾病检索 |
 | 搜索 | `/search` | 关键词输入、回车/按钮提交、热门搜索与快捷推荐词 |
 | 疾病与治疗 | `/diseases` | 蓝湖整图热区导航：治疗方案/医院/专家/药物/案例/资讯锚点 + 咨询表单 |
 | 治疗路径规划 | `/planner` | 搜索 + 热门治疗标签，提交带词跳转疾病检索 |
@@ -28,8 +29,7 @@
 
 | 导航入口 | 路由 | 导航入口 | 路由 |
 | --- | --- | --- | --- |
-| 首页 | `/` | 预约服务 | `/appointment` |
-| 出国就医 | `/overseas-care` | 患者流程 | `/patient-journey` |
+| 出国就医 | `/overseas-care` | 预约服务 | `/appointment` |
 | 我们的服务 | `/services` | IMDOC | `/imdoc` |
 | 全球医生 | `/doctors` | 新闻版块 | `/news` |
 | 合作医院 | `/hospitals` | 全球医院动态 | `/hospital-news` |
@@ -105,6 +105,7 @@ src/
 │   └── diseases/
 │       └── DiseaseModal.tsx           # 疾病详情弹层
 └── pages/
+    ├── HomePage.tsx / .css            # 首页（10 个 artboard 区块，HomePage.css）
     ├── SearchPage.tsx                 # 搜索页
     ├── DiseaseSearchPage.tsx          # 疾病检索页
     ├── TreatmentPlannerPage.tsx       # 治疗路径规划页
@@ -126,7 +127,7 @@ design-reference/                      # 蓝湖原型截图（仅本地开发参
 项目使用 react-router-dom v7，全量懒加载：
 
 - [src/types/routes.ts](src/types/routes.ts) 统一维护 `Page` 联合类型、`pagePaths` URL 映射与 `getPageFromPath` 路径解析；`PAGE_GROUP` 将 `disease-search` 等子页归组到主导航栏目，保证导航高亮正确。
-- [src/App.tsx](src/App.tsx) 以 `lazy` + `Suspense` 装配路由：`REAL_PAGES`（diseases / planner / search / diseaseSearch）直出真实页面，其余 13 页统一走 `PendingPage` 占位。
+- [src/App.tsx](src/App.tsx) 以 `lazy` + `Suspense` 装配路由：`REAL_PAGES`（home / diseases / planner / search / diseaseSearch）直出真实页面，其余 12 页统一走 `PendingPage` 占位，`path="*"` 兜底回首页。
 - 路由切换自动滚动回顶，并按页面映射更新 `document.title`（SEO）。
 
 ## 设计系统
