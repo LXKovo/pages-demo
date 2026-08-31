@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SiteFooter } from '../components/layout/SiteFooter'
-import logo from '../assets/lanhu/logo.png'
-import searchIcon from '../assets/lanhu/search.png'
-import { hotSearches } from '../data/siteData'
+import { SiteHeader } from '../components/layout/SiteHeader'
+import searchIcon from '../assets/lanhu/search/big-search-icon.png'
 import { pagePaths } from '../types/routes'
+import '../SearchPage.css'
+
+const SEARCH_CATEGORIES = ['肿瘤与癌症', '神经系统疾病', '血液与免疫系统疾病']
+const SEARCH_DISEASES = ['肺癌', '肝癌', '结直肠癌', '脑瘤', '胰腺癌', '黑色素瘤']
 
 export function SearchPage() {
   const navigate = useNavigate()
@@ -14,35 +17,37 @@ export function SearchPage() {
   }
 
   return (
-    <main className="search-page">
-      <div className="search-artboard">
-        <div className="utility-bar search-utility-bar">
-          <button onClick={() => navigate(pagePaths.doctors)}>找医生</button>
-          <button onClick={() => navigate(pagePaths.hospitals)}>找医院</button>
-          <button onClick={() => navigate(pagePaths.planner)}>寻找治疗方法</button>
-          <button className="utility-active" onClick={() => navigate(pagePaths.appointment)}>预约服务 ↗</button>
-        </div>
-        <section className="search-shell">
-          <button className="search-brand" onClick={() => navigate(pagePaths.home)} aria-label="返回首页">
-            <img src={logo} alt="艾恩国际医疗咨询" />
+    <div className="page search-page">
+      <SiteHeader />
+      <section className="search-artboard">
+        <div className="search-title-row">
+          <input
+            autoFocus
+            value={query}
+            onChange={event => setQuery(event.target.value)}
+            onKeyDown={event => event.key === 'Enter' && submit()}
+            placeholder="在此搜索"
+            aria-label="在此搜索"
+          />
+          <button onClick={() => submit()} aria-label="提交搜索">
+            <img src={searchIcon} alt="" />
           </button>
-          <button className="close" aria-label="关闭" onClick={() => navigate(pagePaths.home)}>×</button>
-          <div className="search-title-row">
-            <input autoFocus value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => event.key === 'Enter' && submit()} placeholder="在此搜索" />
-            <button onClick={() => submit()} aria-label="提交搜索"><img src={searchIcon} alt="" /></button>
-          </div>
-          <div className="hot-search">
-            <h3>热门搜索</h3>
-            {hotSearches.map(item => <button key={item} onClick={() => { setQuery(item); submit(item) }}>{item}</button>)}
-          </div>
-        </section>
-        <div className="suggestion-chips">
-          <button onClick={() => submit('CAR-T')}>CAR-T</button>
-          <button onClick={() => submit('癌症免疫疗法')}>癌症免疫疗法</button>
-          <button onClick={() => submit('骨髓移植')}>骨髓移植</button>
         </div>
-        <SiteFooter />
-      </div>
-    </main>
+        <div className="search-hot">热门搜索</div>
+        <ul className="search-list">
+          {SEARCH_CATEGORIES.map(item => (
+            <li key={item} className="search-cat">
+              <button onClick={() => submit(item)}>{item}</button>
+            </li>
+          ))}
+          {SEARCH_DISEASES.map(item => (
+            <li key={item}>
+              <button onClick={() => submit(item)}>{item}</button>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <SiteFooter />
+    </div>
   )
 }
