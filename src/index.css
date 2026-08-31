@@ -1,5 +1,43 @@
 @import "tailwindcss";
 
+/* ============================================================
+   设计 Token —— 与 docs/design.md 一一对应
+   来源：蓝湖 34 页设计稿提取的 CSS 标注
+   Tailwind v4：--color-* 生成颜色工具类并暴露为全局 CSS 变量
+   ============================================================ */
+@theme {
+  /* 品牌主色 */
+  --color-navy: #2b2c6c; /* rgba(43,44,108,1)  主色：标题/Footer/hero 蒙层 */
+  --color-magenta: #fa007f; /* rgba(250,0,127,1)  强调：CTA/价格/提交按钮 */
+  --color-teal: #00c6ae; /* rgba(0,198,174,1)  次要 CTA：标签/图标/teal 按钮 */
+  --color-teal-deep: #1dba9b; /* rgba(29,186,155,1)  预约服务条专用 teal */
+  --color-teal-icon: #1dbcad; /* rgba(29,188,169,1)  图标双色 teal */
+  --color-teal-icon2: #2fb297; /* rgba(47,178,151,1) 次级图标绿 */
+  --color-magenta-accent: #e6317d; /* rgba(230,49,125,1)  IMDOC 角标/magenta 图标 */
+  --color-magenta-icon: #eb3d85; /* rgba(235,61,133,1)  图标双色 magenta */
+
+  /* 文字 */
+  --color-ink: #2b2c6c; /* 正文主色（同 navy） */
+  --color-muted: #858391; /* 次级灰文字 */
+  --color-gray-900: #333333; /* rgba(51,51,51,1)     卡片标题/正文深灰 */
+  --color-gray-800: #4d4d4d; /* rgba(77,77,77,1) */
+  --color-gray-700: #666666; /* rgba(102,102,102,1)  次级正文 */
+  --color-gray-600: #71717d; /* rgba(113,113,125,1)  详情正文/摘要 */
+  --color-gray-500: #999999; /* rgba(153,153,153,1)  面包屑/元数据 */
+  --color-gray-400: #858391; /* 旧 muted（搜索输入框/占位） */
+
+  /* 背景与边框 */
+  --color-gray-50: #f8f8f9; /* rgba(248,248,249,1)  浅灰背景/信息卡 */
+  --color-gray-100: #f5f5f5; /* rgba(245,245,245,1)  筛选/分隔背景 */
+  --color-gray-200: #eeeef2; /* rgba(238,238,242,1)  卡片/侧栏边框 */
+  --color-gray-300: #e9e7e7; /* rgba(233,231,231,1)  卡片边框 */
+  --color-border-input: #c0c1d7; /* rgba(192,193,215,1) 输入框边框 */
+  --color-border-check: #bfbfbf; /* rgba(191,191,191,1) checkbox 边框 */
+
+  /* 阴影 */
+  --shadow-card: 0 5px 15px rgba(164, 172, 171, 0.25); /* 卡片投影 */
+}
+
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -1,9 +1,11 @@
+/* 兼容别名：映射到 index.css 的 @theme 规范 token */
 :root {
-  --navy: rgba(43, 44, 108, 1);
-  --teal: #1db7a3;
-  --pink: #f50778;
-  --ink: #2b2c6c;
-  --muted: #858391;
+  --navy: var(--color-navy);
+  --teal: var(--color-teal);
+  --teal-deep: var(--color-teal-deep);
+  --pink: var(--color-magenta);
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
 }
 * {
   box-sizing: border-box;
@@ -28,7 +30,7 @@ button {
 }
 .utility-bar {
   height: 40px;
-  background: linear-gradient(90deg, #2b2c6c 0%, #2b2c6c 75%, #1db7a3 75%);
+  background: linear-gradient(90deg, var(--navy) 0%, var(--navy) 75%, var(--teal-deep) 75%);
   color: #fff;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -37,7 +39,7 @@ button {
   font-size: 16px;
 }
 .utility-active {
-  background: #1db7a3;
+  background: var(--teal-deep);
   height: 40px;
   display: grid;
   place-items: center;
@@ -211,6 +213,21 @@ button {
 .footer .phone {
   font-size: 25px;
 }
+.footer-link {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font-size: 16px;
+  line-height: 2;
+  color: #fff;
+  transition: color 0.2s ease;
+}
+.footer-link:hover {
+  color: var(--teal);
+}
 .copyright {
   height: 70px;
   display: grid;
@@ -313,7 +330,7 @@ button {
   color: #858391;
 }
 .tabs button.selected {
-  background: #10c5b3;
+  background: var(--teal);
   color: #fff;
 }
 .disease-grid-large {
@@ -460,6 +477,9 @@ button {
   .footer p {
     font-size: 12px;
   }
+  .footer-link {
+    font-size: 12px;
+  }
   .footer .phone {
     font-size: 16px;
   }
@@ -516,4 +536,34 @@ button {
   place-items: center;
   font-size: 18px;
   color: var(--muted);
+}
+
+/* 表单提交反馈 toast（fixed 提示，不破坏整图视觉） */
+.toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  max-width: min(420px, calc(100vw - 48px));
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  animation: toast-in 0.25s ease;
+}
+.toast-error {
+  background: var(--pink);
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

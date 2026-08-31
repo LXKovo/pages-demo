@@ -32,10 +32,10 @@
   background: transparent;
   font-size: clamp(20px, 3.125vw, 60px);
   letter-spacing: 5px;
-  color: rgba(133, 131, 145, 1);
+  color: var(--color-muted);
 }
 .search-title-row input::placeholder {
-  color: rgba(133, 131, 145, 1);
+  color: var(--color-muted);
 }
 .search-title-row button {
   flex: none;
@@ -58,7 +58,7 @@
   white-space: nowrap;
   font-size: clamp(10px, 1.25vw, 24px);
   font-weight: 500;
-  color: rgba(43, 44, 108, 1);
+  color: var(--color-navy);
 }
 
 .search-list {
@@ -82,11 +82,11 @@
   white-space: nowrap;
   font-size: clamp(8px, 0.9375vw, 18px);
   font-weight: 400;
-  color: rgba(43, 44, 108, 1);
+  color: var(--color-navy);
   transition: color 0.2s ease;
 }
 .search-list button:hover {
-  color: rgba(245, 7, 120, 1);
+  color: var(--color-magenta);
 }
 
 @media (max-width: 900px) {
