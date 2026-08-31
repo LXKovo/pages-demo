@@ -15,6 +15,9 @@ dist-ssr
 # pnpm store cache
 .pnpm-store
 
+# 本地设计原型参考（蓝湖导出，仅开发机使用，不提交不发布）
+design-reference/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
