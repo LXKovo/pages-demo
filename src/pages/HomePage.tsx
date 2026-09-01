@@ -1,16 +1,23 @@
+import { useLayoutEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SiteFooter } from '../components/layout/SiteFooter'
 import { SiteHeader } from '../components/layout/SiteHeader'
 import { pagePaths, type Page } from '../types/routes'
 import './HomePage.css'
 
-import heroBg from '../assets/lanhu/home/hero-bg.jpg'
+import heroBg from '../assets/lanhu/home/hero-bg.png'
 import heroArrow from '../assets/lanhu/home/hero-arrow.png'
 import moreArrow from '../assets/lanhu/home/more-arrow.png'
 import faqArrow from '../assets/lanhu/home/faq-arrow.png'
 import coreUsa from '../assets/lanhu/home/core-usa.png'
 import doctorAvatar from '../assets/lanhu/home/doctor-avatar.png'
-import hospitalBg from '../assets/lanhu/home/hospital-bg.png'
+import hospital1 from '../assets/lanhu/home/hospital-1.png'
+import hospital2 from '../assets/lanhu/home/hospital-2.png'
+import hospital3 from '../assets/lanhu/home/hospital-3.png'
+import hospital4 from '../assets/lanhu/home/hospital-4.png'
+import hospital5 from '../assets/lanhu/home/hospital-5.png'
+import hospital6 from '../assets/lanhu/home/hospital-6.png'
+import hospitalOverlay from '../assets/lanhu/home/hospital-overlay.png'
 import stat1 from '../assets/lanhu/home/stat-1.png'
 import stat2 from '../assets/lanhu/home/stat-2.png'
 import stat3 from '../assets/lanhu/home/stat-3.png'
@@ -58,6 +65,16 @@ const stats = [
 
 const serviceTags = ['美国看病', '日本看病', '英国看病', '国际远程会诊', '海外高端体检']
 
+const servicePanels = [
+  { name: '美国看病', detail: '美国是全球医疗高地，是出国就医的主要目的地国家，拥有更多新药、新疗法。' },
+  { name: '日本看病', detail: '连接日本权威医院与专科团队，提供诊疗预约、病历翻译及全程就医协调。' },
+  { name: '英国看病', detail: '对接英国领先医疗机构与国际专家，为复杂疾病提供专业评估和治疗建议。' },
+  { name: '国际远程会诊', detail: '无需远行即可与海外权威专家视频会诊，获得第二诊疗意见与方案参考。' },
+  { name: '海外高端体检', detail: '按健康需求匹配海外体检机构与套餐，提供预约、翻译和报告解读服务。' },
+]
+
+const hospitalTags = ['美国医院', '日本医院', '英国医院', '德国医院', '中国医院']
+
 const diseases = [
   { name: '肺癌', icon: disease1, keyword: '肺癌' },
   { name: '结直肠癌', icon: disease2, keyword: '结直肠癌' },
@@ -79,12 +96,12 @@ const DOCTOR_TEMPLATE = {
 const doctors = Array.from({ length: 9 }, () => DOCTOR_TEMPLATE)
 
 const hospitals = [
-  { name: '皇家马斯登医院', rank: '癌症专科排名:1 (2025年美国医院排名)' },
-  { name: '大奥蒙德街儿童医院', rank: '癌症专科排名:1 (2025年美国医院排名)' },
-  { name: '皇家布朗普顿医院', rank: '癌症专科排名:1 (2025年美国医院排名)' },
-  { name: '皇家国立骨科医院', rank: '癌症专科排名:1 (2025年美国医院排名)' },
-  { name: '帝国理工学院医院', rank: '癌症专科排名:1 (2025年美国医院排名)' },
-  { name: '英国摩尔菲尔德眼科医院', rank: '癌症专科排名:1 (2025年美国医院排名)' },
+  { name: '皇家马斯登医院', rank: '癌症专科排名:1 (2025年美国医院排名)', img: hospital1 },
+  { name: '大奥蒙德街儿童医院', rank: '癌症专科排名:1 (2025年美国医院排名)', img: hospital2 },
+  { name: '皇家布朗普顿医院', rank: '癌症专科排名:1 (2025年美国医院排名)', img: hospital3 },
+  { name: '皇家国立骨科医院', rank: '癌症专科排名:1 (2025年美国医院排名)', img: hospital4 },
+  { name: '帝国理工学院医院', rank: '癌症专科排名:1 (2025年美国医院排名)', img: hospital5 },
+  { name: '英国摩尔菲尔德眼科医院', rank: '癌症专科排名:1 (2025年美国医院排名)', img: hospital6 },
 ]
 
 const cases = [
@@ -169,6 +186,22 @@ const processes = [
 
 export function HomePage() {
   const navigate = useNavigate()
+  const stageRef = useRef<HTMLDivElement>(null)
+  const [stageScale, setStageScale] = useState(1)
+  const [serviceIndex, setServiceIndex] = useState(0)
+  const [hospitalIndex, setHospitalIndex] = useState(0)
+  const [openFaq, setOpenFaq] = useState(0)
+
+  useLayoutEffect(() => {
+    const stage = stageRef.current
+    if (!stage) return
+
+    const updateScale = () => setStageScale(Math.min(stage.parentElement!.clientWidth / 1920, 1))
+    const observer = new ResizeObserver(updateScale)
+    observer.observe(stage.parentElement!)
+    updateScale()
+    return () => observer.disconnect()
+  }, [])
 
   const goDisease = (keyword: string) => {
     if (!keyword) {
@@ -180,7 +213,13 @@ export function HomePage() {
 
   return (
     <main className="home-page">
-      <SiteHeader />
+      <div className="home-stage-space" style={{ height: 9759 * stageScale }}>
+        <div
+          ref={stageRef}
+          className="home-stage"
+          style={{ transform: `translateX(-50%) scale(${stageScale})` }}
+        >
+          <SiteHeader />
 
       {/* Hero */}
       <section className="home-block home-hero">
@@ -235,18 +274,26 @@ export function HomePage() {
         <p className="home-font home-services-desc">
           链接全球优质医疗资源，搭建跨国多学科诊疗通道。 我们联动海外权威医疗机构与专科专家，提供国际远程会诊、海外就医、高端体检等多元化跨境医疗服务。依托多年行业实践经验，标准化统筹就医全流程，为患者提供可靠、连贯的跨境医疗咨询与落地支持。
         </p>
-        <div className="home-services-tags">
+        <div className="home-services-tags" role="tablist" aria-label="核心服务">
           {serviceTags.map((tag, index) => (
-            <span key={tag} className={`home-font home-services-tag${index === 0 ? ' active' : ''}`}>
+            <button
+              key={tag}
+              type="button"
+              role="tab"
+              aria-selected={serviceIndex === index}
+              aria-controls="home-service-panel"
+              className={`home-font home-services-tag${serviceIndex === index ? ' active' : ''}`}
+              onClick={() => setServiceIndex(index)}
+            >
               {tag}
-            </span>
+            </button>
           ))}
         </div>
-        <div className="home-services-body">
-          <img className="home-services-img" src={coreUsa} alt="美国看病" />
+        <div id="home-service-panel" className="home-services-body" role="tabpanel">
+          <img className="home-services-img" src={coreUsa} alt={servicePanels[serviceIndex].name} />
           <div className="home-services-text">
-            <h3 className="home-font home-services-name">美国看病</h3>
-            <p className="home-font home-services-detail">美国是全球医疗高地，是出国就医的主要目的地国家，拥有更多新药、新疗法。</p>
+            <h3 className="home-font home-services-name">{servicePanels[serviceIndex].name}</h3>
+            <p className="home-font home-services-detail">{servicePanels[serviceIndex].detail}</p>
             <button
               type="button"
               className="home-font home-services-more"
@@ -333,17 +380,25 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 合作医院 */}
-      <section className="home-block home-hospitals">
+      {/* 合作医院至页尾：蓝湖 group_40 统一画布 */}
+      <div className="home-content-tail">
+        <section className="home-block home-hospitals">
         <h2 className="home-font home-hospitals-title">
           出国看病
           <span className="accent">合作医院</span>
         </h2>
-        <div className="home-hospitals-tags">
-          {['美国医院', '日本医院', '英国医院', '德国医院', '中国医院'].map((tag, index) => (
-            <span key={tag} className={`home-font home-hospitals-tag${index === 0 ? ' active' : ''}`}>
+        <div className="home-hospitals-tags" role="tablist" aria-label="合作医院国家">
+          {hospitalTags.map((tag, index) => (
+            <button
+              key={tag}
+              type="button"
+              role="tab"
+              aria-selected={hospitalIndex === index}
+              className={`home-font home-hospitals-tag${hospitalIndex === index ? ' active' : ''}`}
+              onClick={() => setHospitalIndex(index)}
+            >
               {tag}
-            </span>
+            </button>
           ))}
         </div>
         <button
@@ -362,7 +417,8 @@ export function HomePage() {
               className="home-hospital-card"
               onClick={() => navigate(pagePaths.hospitals)}
             >
-              <img className="home-hospital-card-bg" src={hospitalBg} alt="" />
+              <img className="home-hospital-card-bg" src={hospital.img} alt="" />
+              <img className="home-hospital-card-overlay" src={hospitalOverlay} alt="" />
               <span className="home-font home-hospital-name">{hospital.name}</span>
               <span className="home-font home-hospital-rank">{hospital.rank}</span>
             </button>
@@ -450,16 +506,28 @@ export function HomePage() {
           <span className="accent">解答</span>
         </h2>
         <p className="home-font home-faq-sub">您关心的问题，我们一一解答</p>
-        <div className="home-faq-item home-faq-open">
-          <h3 className="home-font home-faq-q">{faqs[0].q}</h3>
-          <p className="home-font home-faq-a">{faqs[0].a}</p>
-        </div>
-        {faqs.slice(1).map((faq, index) => (
-          <div key={index} className={`home-faq-item home-faq-closed home-faq-closed-${index + 2}`}>
-            <h3 className="home-font home-faq-q">{faq.q}</h3>
-            <img className="home-faq-arrow" src={faqArrow} alt="" />
-          </div>
-        ))}
+        {faqs.map((faq, index) => {
+          const expanded = openFaq === index
+          return (
+            <button
+              key={`${faq.q}-${index}`}
+              type="button"
+              className={`home-faq-item ${expanded ? 'home-faq-open' : 'home-faq-closed'} home-faq-position-${index + 1}`}
+              aria-expanded={expanded}
+              aria-controls={`home-faq-answer-${index}`}
+              onClick={() => setOpenFaq(index)}
+            >
+              <span className="home-font home-faq-q">{faq.q}</span>
+              {expanded ? (
+                <span id={`home-faq-answer-${index}`} className="home-font home-faq-a">
+                  {faq.a ?? faqs[0].a}
+                </span>
+              ) : (
+                <img className="home-faq-arrow" src={faqArrow} alt="" />
+              )}
+            </button>
+          )
+        })}
         <button
           type="button"
           className="home-font home-faq-more"
@@ -488,7 +556,10 @@ export function HomePage() {
         ))}
       </section>
 
-      <SiteFooter />
+          <SiteFooter />
+        </div>
+        </div>
+      </div>
     </main>
   )
 }

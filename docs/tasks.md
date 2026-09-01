@@ -160,12 +160,9 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 
 ### 4.5 首页（HomePage）—— artboard 分块还原
 
-- 设计稿 1920×9781 超长画布，按设计稿 `group_*` 定位重算为 10 个 `home-block`（每个 `width:1920px; max-width:100%; aspect-ratio; margin:0 auto; overflow:hidden`），等高缩放保证整页视觉比例；
-- 区块高度比例：hero 1920/930 · 关于+数据 1920/530 · 核心服务 1920/847 · 疾病入口 1920/500 · 医生 1920/1100 · 医院 1920/855 · 案例 1920/805 · 资讯 1920/682 · FAQ 1920/741 · 流程 1920/760；
-- 区块内元素绝对定位百分比 + `clamp(min, px/1920*vw, max)` 字号，适配常见视口不破版；
-- 复用全局 `SiteHeader` / `SiteFooter`（咨询表单与页脚由 SiteFooter 承担，避免与设计稿 box_30/box_31 重复）；
-- 交互：hero 4 按钮跳转（appointment/hospitals/services/services）；8 疾病图标——7 病种带词跳 `/disease-search?q=xxx`（DiseaseSearchPage 通过 `useSearchParams` 读取预填），「更多」跳 `/diseases`；各分区「了解更多」teal 胶囊跳对应列表页；资讯卡跳 `/medical-guide`；
-- 样式集中在 `src/pages/HomePage.css`，复用 `--color-*` 设计 token（navy/magenta/teal/gray 灰阶），未在组件内硬编码色值。
+- 设计稿 1920×9781，首页按蓝湖累计坐标使用统一 1920px artboard 缩放容器；Header/hero、平台介绍、核心服务、疾病、医生及 group_40 尾部区域共用同一缩放比例；窄屏由 `.home-stage-space` 保持完整画布高度并等比缩放，避免区块独立 aspect-ratio 导致文字、控件与容器不同步；
+- 关键区块：utility 40px、Header（含主导航）166px、hero 930px、平台介绍 530px、核心服务 1110px、疾病 500px、医生 1100px、医院内容区 1075px、服务流程 760px、咨询 Banner 580px、Footer 主体 560px、版权 70px；医院卡固定 440×297，背景图与 440×142 文字蒙层分离；
+- 交互：hero 4 按钮跳转（appointment/hospitals/services/services）；8 疾病入口带词跳 `/disease-search?q=xxx`；核心服务与医院分类为可操作 tab；FAQ 为可展开按钮；各分区「了解更多」及资讯/资源卡保留原有路由；图片全部本地化到 `src/assets/lanhu/home/`。
 
 ---
 

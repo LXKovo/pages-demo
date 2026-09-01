@@ -11,7 +11,7 @@
 
 ### A1. 首页（设计稿 #9）—— 路由 `/` ✅ 已实现（HomePage artboard 还原）
 
-设计稿 1920×9781，切分为 10 个 artboard 区块（`home-block`：1920 基准 + `aspect-ratio` + `max-width:100%` 等比缩放），首尾复用全局 Header/Footer：
+设计稿 1920×9781，首页主体按蓝湖实际累计坐标组织为统一 1920px artboard；窄屏通过整幅画布等比缩放，首尾复用全局 Header/Footer：
 
 | 区块 | 说明 |
 | --- | --- |

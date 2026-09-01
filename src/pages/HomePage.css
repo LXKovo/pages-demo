@@ -1,15 +1,29 @@
-/* 首页 — 基于蓝湖设计稿 1920×9781 画布分块重建 */
+/* 首页 — 蓝湖首页 1920×9781 统一画布几何 */
 .home-page {
+  width: 100%;
   background: #fff;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-/* artboard 分块：每块等比缩放（1920 基准，max-width:100% 时宽度收窄、高度按比例收缩） */
+.home-stage-space {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home-stage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1920px;
+  height: 9759px;
+  transform-origin: top center;
+  background: #fff;
+}
+
 .home-block {
   position: relative;
-  margin: 0 auto;
   width: 1920px;
-  max-width: 100%;
   overflow: hidden;
 }
 
@@ -17,30 +31,11 @@
   font-family: "Source Han Sans CN", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
-/* teal 胶囊「了解更多」 */
-.home-more-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4%;
-  height: 45px;
-  padding: 0 3%;
-  border: 0;
-  border-radius: 100px;
-  background: var(--color-teal);
-  color: #fff;
-  font-size: clamp(5px, 0.833vw, 16px);
-  letter-spacing: 3px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.home-more-pill img {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
+.home-stage button:focus-visible {
+  outline: 3px solid rgba(0, 198, 174, 0.7);
+  outline-offset: 4px;
 }
 
-/* 各分区「了解更多」teal 胶囊 */
 .home-doctors-more,
 .home-hospitals-more,
 .home-cases-more,
@@ -48,18 +43,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4%;
+  gap: 12px;
   height: 45px;
-  padding: 0 3%;
+  padding: 0 28px;
   border: 0;
   border-radius: 100px;
   background: var(--color-teal);
   color: #fff;
-  font-size: clamp(5px, 0.833vw, 16px);
+  font-size: 16px;
   letter-spacing: 3px;
-  cursor: pointer;
   white-space: nowrap;
 }
+
 .home-doctors-more img,
 .home-hospitals-more img,
 .home-cases-more img,
@@ -69,9 +64,9 @@
   object-fit: contain;
 }
 
-/* ---------- Hero（930） ---------- */
+/* Hero（930） */
 .home-hero {
-  aspect-ratio: 1920 / 930;
+  height: 930px;
 }
 .home-hero-bg {
   position: absolute;
@@ -82,54 +77,52 @@
 }
 .home-hero-title {
   position: absolute;
-  left: 21.35%;
-  top: 33.66%;
+  left: 410px;
+  top: 304px;
   margin: 0;
   color: #fff;
-  font-size: clamp(23px, 3.646vw, 70px);
+  font-size: 70px;
   font-weight: 500;
   letter-spacing: 5px;
   white-space: nowrap;
 }
 .home-hero-sub {
   position: absolute;
-  left: 25.31%;
-  top: 47.74%;
+  left: 486px;
+  top: 444px;
   margin: 0;
   color: #fff;
-  font-size: clamp(11px, 1.667vw, 32px);
+  font-size: 32px;
   letter-spacing: 5px;
   white-space: nowrap;
 }
 .home-hero-cover {
   position: absolute;
-  left: 34.69%;
-  top: 55.91%;
+  left: 666px;
+  top: 520px;
   margin: 0;
   color: #fff;
-  font-size: clamp(8px, 1.25vw, 24px);
+  font-size: 24px;
   letter-spacing: 5px;
   white-space: nowrap;
 }
 .home-hero-btns {
   position: absolute;
-  left: 18.7%;
-  top: 88.17%;
+  left: 359px;
+  top: 820px;
   display: flex;
-  width: 62.5%;
-  height: 7.53%;
+  width: 1200px;
+  height: 70px;
 }
 .home-hero-btn {
   position: relative;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  flex: 1;
-  border: 0;
-  cursor: pointer;
+  height: 70px;
   color: rgba(43, 44, 108, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 3px;
   white-space: nowrap;
 }
@@ -139,208 +132,209 @@
 .home-hero-btn-4 { background: rgba(240, 240, 255, 1); border-radius: 0 100px 100px 0; }
 .home-hero-btn img {
   position: absolute;
-  right: 6.5%;
-  width: 4.3%;
-  max-width: 30px;
-  aspect-ratio: 1;
+  right: 20px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
 }
 
-/* ---------- 关于我们 + 数据背书（140→670） ---------- */
+/* 平台介绍与数据（530） */
 .home-about-stats {
-  aspect-ratio: 1920 / 530;
+  height: 530px;
+}
+.home-about-title,
+.home-services-title,
+.home-doctors-title,
+.home-hospitals-title,
+.home-cases-title,
+.home-news-title,
+.home-faq-title,
+.home-process-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  line-height: 52px;
+  color: var(--color-navy);
+}
+.home-about-title .accent,
+.home-services-title .accent,
+.home-doctors-title .accent,
+.home-hospitals-title .accent,
+.home-cases-title .accent,
+.home-news-title .accent,
+.home-faq-title .accent {
+  color: var(--color-magenta);
 }
 .home-about-title {
   position: absolute;
-  left: 12.5%;
-  top: 0;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  line-height: 1.45;
-  color: var(--color-navy);
-}
-.home-about-title .accent {
-  color: var(--color-magenta);
+  left: 240px;
+  top: 140px;
 }
 .home-about-desc {
   position: absolute;
-  left: 12.5%;
-  top: 23.4%;
-  width: 74.7%;
+  left: 240px;
+  top: 214px;
+  width: 1435px;
   margin: 0;
   color: rgba(102, 102, 102, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 5px;
-  line-height: 2;
+  line-height: 36px;
 }
 .home-stats {
   position: absolute;
-  left: 12.7%;
-  top: 38.49%;
-  width: 74.6%;
+  left: 244px;
+  top: 350px;
+  width: 1432px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 3.85%;
-  row-gap: 7.55%;
+  grid-template-columns: repeat(3, 428px);
+  gap: 40px 74px;
 }
 .home-stat {
   display: flex;
   align-items: center;
-  gap: 4%;
-  background: #fff;
+  width: 428px;
+  height: 140px;
+  gap: 18px;
+  padding: 20px 24px;
   border-radius: 20px;
+  background: #fff;
   box-shadow: 0 5px 15px rgba(164, 172, 171, 0.25);
-  padding: 4.5% 5%;
 }
 .home-stat-icon {
   flex: none;
-  width: 23.4%;
-  max-width: 100px;
-  aspect-ratio: 1;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 .home-stat-num {
   color: rgba(29, 186, 155, 1);
-  font-size: clamp(9px, 1.354vw, 26px);
+  font-size: 26px;
   font-weight: 500;
   white-space: nowrap;
 }
 .home-stat-label {
   color: rgba(43, 44, 108, 1);
-  font-size: clamp(5px, 0.833vw, 16px);
+  font-size: 16px;
   letter-spacing: 5px;
   font-weight: 500;
   white-space: nowrap;
 }
 .home-stat-desc {
-  margin-top: 3%;
+  margin-top: 4px;
   color: rgba(113, 113, 125, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
-  letter-spacing: 5px;
-  line-height: 1.5;
+  font-size: 15px;
+  letter-spacing: 3px;
+  line-height: 22px;
 }
 
-/* ---------- 核心服务（793→1640） ---------- */
+/* 核心服务（1110，与前段合计1640） */
 .home-services {
-  aspect-ratio: 1920 / 847;
+  height: 1110px;
 }
 .home-services-title {
   position: absolute;
-  left: 12.5%;
-  top: 0;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  line-height: 1.45;
-  color: var(--color-navy);
-}
-.home-services-title .accent {
-  color: var(--color-magenta);
+  left: 240px;
+  top: 123px;
 }
 .home-services-desc {
   position: absolute;
-  left: 12.5%;
-  top: 8.5%;
-  width: 74.4%;
+  left: 240px;
+  top: 195px;
+  width: 1430px;
   margin: 0;
   color: rgba(102, 102, 102, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 5px;
-  line-height: 2;
+  line-height: 36px;
+}
+.home-services-tags,
+.home-hospitals-tags {
+  position: absolute;
+  display: flex;
+  gap: 20px;
 }
 .home-services-tags {
-  position: absolute;
-  left: 12.66%;
-  top: 19.84%;
-  display: flex;
-  gap: 1.6%;
+  left: 243px;
+  top: 335px;
 }
-.home-services-tag {
+.home-services-tag,
+.home-hospitals-tag {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 46px;
-  padding: 0 2.2%;
-  border-radius: 100px;
+  padding: 0 26px;
   border: 1px solid rgba(148, 148, 158, 1);
+  border-radius: 100px;
   color: rgba(148, 148, 158, 1);
-  font-size: clamp(5px, 0.833vw, 16px);
+  font-size: 16px;
   letter-spacing: 3px;
   white-space: nowrap;
 }
-.home-services-tag.active {
+.home-services-tag.active,
+.home-hospitals-tag.active {
   border-color: var(--color-magenta);
   color: var(--color-magenta);
 }
 .home-services-body {
   position: absolute;
-  left: 9.11%;
-  top: 28.81%;
-  width: 81.77%;
-  height: 56.67%;
+  left: 240px;
+  top: 441px;
+  width: 1440px;
+  height: 480px;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 3%;
+  align-items: center;
+  gap: 100px;
 }
 .home-services-img {
-  flex: none;
-  width: 39.5%;
-  aspect-ratio: 620 / 420;
+  width: 620px;
+  height: 420px;
   object-fit: cover;
-  margin-top: 3.5%;
 }
 .home-services-text {
-  flex: 1;
-  padding-top: 3.5%;
+  width: 660px;
 }
 .home-services-name {
   margin: 0;
   color: var(--color-navy);
-  font-size: clamp(13px, 1.979vw, 38px);
+  font-size: 38px;
   font-weight: 700;
   letter-spacing: 3px;
 }
 .home-services-detail {
-  margin: 6% 0 0;
-  max-width: 600px;
+  min-height: 76px;
+  margin: 42px 0 0;
   color: rgba(113, 113, 125, 1);
-  font-size: clamp(7px, 1.042vw, 20px);
+  font-size: 20px;
   letter-spacing: 3px;
-  line-height: 1.9;
+  line-height: 38px;
 }
 .home-services-more {
   display: inline-flex;
   align-items: center;
-  gap: 2%;
-  margin-top: 6%;
-  border: 0;
-  background: none;
-  cursor: pointer;
+  gap: 10px;
+  margin-top: 36px;
   padding: 0;
   color: var(--color-teal);
-  font-size: clamp(5px, 0.781vw, 15px);
+  font-size: 15px;
   letter-spacing: 5px;
 }
 .home-services-more img {
   width: 22px;
   height: 22px;
-  object-fit: contain;
 }
 .home-services-btns {
   display: flex;
-  gap: 2.5%;
-  margin-top: 8%;
+  gap: 18px;
+  margin-top: 44px;
 }
 .home-services-btn {
   height: 50px;
-  padding: 0 2.8%;
+  padding: 0 30px;
   border-radius: 8px;
-  border: 0;
-  cursor: pointer;
-  font-size: clamp(7px, 1.042vw, 20px);
+  font-size: 20px;
   letter-spacing: 5px;
   white-space: nowrap;
 }
@@ -349,565 +343,525 @@
   color: #fff;
 }
 .home-services-btn-outline {
-  background: #fff;
   border: 1px solid var(--color-navy);
+  background: #fff;
   color: var(--color-navy);
 }
 
-/* ---------- 疾病与治疗（500） ---------- */
+/* 疾病与治疗（500） */
 .home-diseases {
-  aspect-ratio: 1920 / 500;
+  height: 500px;
 }
 .home-diseases-title {
   position: absolute;
-  left: 46.35%;
-  top: 14%;
+  left: 50%;
+  top: 70px;
   margin: 0;
   transform: translateX(-50%);
-  font-size: clamp(12px, 1.875vw, 36px);
+  color: var(--color-navy);
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: 5px;
-  color: var(--color-navy);
   white-space: nowrap;
 }
-.home-diseases-title .accent {
-  color: var(--color-magenta);
-}
+.home-diseases-title .accent { color: var(--color-magenta); }
 .home-disease-list {
   position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translateX(-50%);
+  left: 350px;
+  top: 200px;
   display: flex;
-  gap: 6.46%;
+  gap: 91px;
 }
 .home-disease-item {
   display: flex;
+  width: 68px;
   flex-direction: column;
   align-items: center;
-  gap: 12%;
-  border: 0;
-  background: none;
-  cursor: pointer;
+  gap: 28px;
   padding: 0;
 }
 .home-disease-icon {
   width: 68px;
-  max-width: 3.54vw;
-  aspect-ratio: 1;
+  height: 68px;
   object-fit: contain;
 }
 .home-disease-name {
   color: rgba(51, 51, 51, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 5px;
   white-space: nowrap;
 }
 
-/* ---------- 合作医生（1100，浅灰底） ---------- */
+/* 合作医生（1100） */
 .home-doctors {
-  aspect-ratio: 1920 / 1100;
+  height: 1100px;
   background: rgba(248, 248, 249, 1);
 }
 .home-doctors-title {
   position: absolute;
-  left: 12.5%;
-  top: 9.09%;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--color-navy);
-}
-.home-doctors-title .accent {
-  color: var(--color-magenta);
+  left: 240px;
+  top: 100px;
 }
 .home-doctors-sub {
   position: absolute;
-  left: 12.76%;
-  top: 16.18%;
+  left: 245px;
+  top: 178px;
   margin: 0;
   color: rgba(102, 102, 102, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 5px;
 }
 .home-doctors-more {
   position: absolute;
-  right: 15.1%;
-  top: 15.55%;
+  right: 290px;
+  top: 171px;
 }
 .home-doctor-grid {
   position: absolute;
-  left: 12.76%;
-  top: 21.82%;
-  width: 74.48%;
+  left: 245px;
+  top: 240px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3.2%;
+  grid-template-columns: repeat(3, 460px);
+  grid-template-rows: repeat(3, 220px);
+  gap: 45px 40px;
 }
 .home-doctor-card {
   display: flex;
-  background: #fff;
+  width: 460px;
+  height: 220px;
+  padding: 40px 24px;
   border-radius: 20px;
-  padding: 4% 3.5%;
+  background: #fff;
   box-shadow: 0 5px 15px rgba(164, 172, 171, 0.25);
-  cursor: pointer;
-  border: 0;
   text-align: left;
 }
 .home-doctor-avatar {
   flex: none;
-  width: 26.4%;
-  max-width: 140px;
-  aspect-ratio: 1;
-  object-fit: cover;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .home-doctor-info {
-  flex: 1;
-  padding-left: 5%;
   display: flex;
+  min-width: 0;
+  flex: 1;
   flex-direction: column;
+  padding-left: 20px;
 }
 .home-doctor-name {
   margin: 0;
   color: var(--color-navy);
-  font-size: clamp(8px, 1.25vw, 24px);
+  font-size: 24px;
   font-weight: 500;
 }
-.home-doctor-title {
-  margin: 4% 0 0;
-  color: rgba(113, 113, 125, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
-  letter-spacing: 5px;
-}
-.home-doctor-intro {
-  margin: 4% 0 0;
-  color: rgba(102, 102, 102, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
-  letter-spacing: 5px;
-  line-height: 1.6;
-  flex: 1;
-  overflow: hidden;
-}
+.home-doctor-title,
+.home-doctor-intro,
 .home-doctor-hospital {
-  margin: 4% 0 0;
-  color: rgba(47, 178, 151, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
-  letter-spacing: 5px;
+  margin: 8px 0 0;
+  overflow: hidden;
+  font-size: 16px;
+  letter-spacing: 2px;
+  line-height: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
+.home-doctor-title { color: rgba(113, 113, 125, 1); }
+.home-doctor-intro { color: rgba(102, 102, 102, 1); }
+.home-doctor-hospital { color: rgba(47, 178, 151, 1); }
 
-/* ---------- 合作医院（0→855） ---------- */
+/* 合作医院（855） */
 .home-hospitals {
-  aspect-ratio: 1920 / 855;
+  height: 1075px;
 }
 .home-hospitals-title {
   position: absolute;
-  left: 12.5%;
-  top: 14.04%;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--color-navy);
-}
-.home-hospitals-title .accent {
-  color: var(--color-magenta);
+  left: 240px;
+  top: 120px;
 }
 .home-hospitals-tags {
-  position: absolute;
-  left: 12.6%;
-  top: 25.15%;
-  display: flex;
-  gap: 1.6%;
-}
-.home-hospitals-tag {
-  display: flex;
-  align-items: center;
-  height: 46px;
-  padding: 0 2.2%;
-  border-radius: 100px;
-  border: 1px solid rgba(148, 148, 158, 1);
-  color: rgba(148, 148, 158, 1);
-  font-size: clamp(5px, 0.833vw, 16px);
-  letter-spacing: 3px;
-  white-space: nowrap;
-}
-.home-hospitals-tag.active {
-  border-color: var(--color-magenta);
-  color: var(--color-magenta);
+  left: 242px;
+  top: 215px;
 }
 .home-hospitals-more {
   position: absolute;
-  left: 61.6%;
-  top: 30.53%;
+  right: 240px;
+  top: 216px;
 }
 .home-hospital-grid {
   position: absolute;
-  left: 12.6%;
-  top: 30.53%;
-  width: 74.8%;
+  left: 236px;
+  top: 321px;
+  width: 1442px;
+  height: 634px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 3.2%;
-  row-gap: 4.68%;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, 440px);
+  grid-template-rows: repeat(2, 297px);
+  gap: 40px 61px;
 }
 .home-hospital-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 5% 6%;
-  aspect-ratio: 440 / 142;
-  border-radius: 20px;
+  width: 440px;
+  height: 297px;
   overflow: hidden;
-  cursor: pointer;
-  border: 0;
+  padding: 0;
+  border-radius: 20px;
   text-align: left;
 }
 .home-hospital-card-bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 440px;
+  height: 297px;
   object-fit: cover;
 }
-.home-hospital-name {
-  position: relative;
-  margin: 0;
+.home-hospital-card-overlay {
+  position: absolute;
+  left: 0;
+  top: 155px;
+  width: 440px;
+  height: 142px;
+}
+.home-hospital-name,
+.home-hospital-rank {
+  position: absolute;
+  left: 26px;
+  z-index: 1;
   color: #fff;
-  font-size: clamp(8px, 1.25vw, 24px);
-  font-weight: 700;
   letter-spacing: 5px;
   white-space: nowrap;
+}
+.home-hospital-name {
+  top: 202px;
+  font-size: 24px;
+  font-weight: 700;
 }
 .home-hospital-rank {
-  position: relative;
-  margin: 4% 0 0;
-  color: #fff;
-  font-size: clamp(6px, 0.9375vw, 18px);
-  letter-spacing: 5px;
+  top: 247px;
+  font-size: 16px;
   font-weight: 500;
-  white-space: nowrap;
 }
 
-/* ---------- 服务案例（0→805） ---------- */
+/* 服务案例（805） */
 .home-cases {
-  aspect-ratio: 1920 / 805;
+  height: 805px;
 }
 .home-cases-title {
   position: absolute;
-  left: 12.5%;
-  top: 14.91%;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--color-navy);
-}
-.home-cases-title .accent {
-  color: var(--color-magenta);
+  left: 240px;
+  top: 120px;
 }
 .home-cases-sub {
   position: absolute;
-  left: 12.5%;
-  top: 24.22%;
+  left: 240px;
+  top: 195px;
   margin: 0;
   color: rgba(113, 113, 125, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 3px;
 }
 .home-cases-more {
   position: absolute;
-  left: 48.4%;
-  top: 23.35%;
+  left: 930px;
+  top: 188px;
 }
 .home-case-row {
   position: absolute;
-  left: 12.55%;
-  width: 75.16%;
+  left: 240px;
   display: flex;
-  gap: 2%;
+  gap: 50px;
 }
-.home-case-row-1 {
-  top: 36.65%;
-}
-.home-case-row-2 {
-  top: 70.19%;
-}
+.home-case-row-1 { top: 295px; }
+.home-case-row-2 { top: 565px; }
 .home-case-card {
-  flex: 1;
   display: flex;
-  gap: 3.5%;
-  border: 0;
-  background: none;
-  cursor: pointer;
+  width: 685px;
+  height: 240px;
   padding: 0;
   text-align: left;
 }
 .home-case-img {
   flex: none;
-  width: 34.7%;
-  aspect-ratio: 250 / 240;
-  object-fit: cover;
+  width: 250px;
+  height: 240px;
   border-radius: 12px;
+  object-fit: cover;
 }
 .home-case-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
+  width: 435px;
+  height: 240px;
+  padding-left: 24px;
+  overflow: hidden;
 }
 .home-case-name {
   margin: 0;
   color: rgba(26, 26, 26, 1);
-  font-size: clamp(7px, 1.146vw, 22px);
+  font-size: 22px;
   font-weight: 500;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .home-case-meta {
   display: flex;
-  gap: 4%;
-  margin-top: 4%;
+  gap: 18px;
+  margin-top: 20px;
   color: rgba(77, 77, 77, 1);
-  font-size: clamp(5px, 0.729vw, 14px);
-  letter-spacing: 3px;
+  font-size: 14px;
+  letter-spacing: 2px;
 }
 .home-case-hospital {
-  margin-top: 4%;
+  margin: 18px 0 0;
   color: rgba(77, 77, 77, 1);
-  font-size: clamp(5px, 0.781vw, 15px);
-  letter-spacing: 3px;
+  font-size: 15px;
+  letter-spacing: 2px;
 }
 .home-case-brief {
-  margin-top: 3%;
+  margin: 15px 0 0;
   color: rgba(102, 102, 102, 1);
-  font-size: clamp(5px, 0.833vw, 16px);
-  letter-spacing: 5px;
-  line-height: 1.6;
+  font-size: 16px;
+  letter-spacing: 3px;
+  line-height: 26px;
 }
 
-/* ---------- 资讯与指南（0→682） ---------- */
+/* 资讯与指南（682） */
 .home-news {
-  aspect-ratio: 1920 / 682;
+  height: 682px;
   background: rgba(248, 248, 249, 1);
 }
 .home-news-title {
   position: absolute;
-  left: 12.5%;
-  top: 17.6%;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--color-navy);
-}
-.home-news-title .accent {
-  color: var(--color-magenta);
+  left: 240px;
+  top: 120px;
 }
 .home-news-more {
   position: absolute;
-  left: 44.27%;
-  top: 17.6%;
+  left: 850px;
+  top: 120px;
 }
 .home-news-grid {
   position: absolute;
-  left: 12.71%;
-  top: 34.02%;
-  width: 74.84%;
+  left: 244px;
+  top: 232px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.6%;
+  grid-template-columns: repeat(4, 340px);
+  gap: 30px;
 }
 .home-news-card {
   display: flex;
+  width: 340px;
+  height: 450px;
   flex-direction: column;
-  background: #fff;
+  overflow: hidden;
+  padding: 0;
   border: 1px solid rgba(233, 231, 231, 1);
   border-radius: 20px;
-  overflow: hidden;
-  cursor: pointer;
-  padding: 0;
+  background: #fff;
   text-align: left;
 }
 .home-news-img {
-  width: 100%;
-  aspect-ratio: 340 / 230;
+  width: 340px;
+  height: 230px;
   object-fit: cover;
 }
 .home-news-info {
-  flex: 1;
   display: flex;
+  height: 220px;
   flex-direction: column;
-  padding: 6% 7%;
+  padding: 18px 23px 20px;
 }
 .home-news-name {
   margin: 0;
   color: rgba(51, 51, 51, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   font-weight: 500;
-  letter-spacing: 5px;
-  line-height: 1.6;
+  letter-spacing: 3px;
+  line-height: 28px;
 }
 .home-news-excerpt {
-  margin: 5% 0 0;
+  margin: 12px 0 0;
   color: rgba(118, 109, 95, 1);
-  font-size: clamp(5px, 0.833vw, 16px);
-  letter-spacing: 5px;
-  line-height: 1.6;
-  flex: 1;
+  font-size: 15px;
+  letter-spacing: 2px;
+  line-height: 24px;
+  overflow: hidden;
 }
 .home-news-detail {
-  align-self: flex-start;
-  margin-top: 8%;
+  display: grid;
+  width: 150px;
   height: 46px;
-  padding: 0 5%;
+  margin-top: auto;
+  place-items: center;
   border-radius: 100px;
-  border: 0;
   background: var(--color-teal);
   color: #fff;
-  font-size: clamp(5px, 0.833vw, 16px);
+  font-size: 16px;
   letter-spacing: 5px;
-  cursor: pointer;
-  white-space: nowrap;
 }
 
-/* ---------- 常见问题（0→741） ---------- */
+/* FAQ（741） */
 .home-faq {
-  aspect-ratio: 1920 / 741;
+  height: 741px;
 }
 .home-faq-title {
   position: absolute;
-  left: 12.5%;
-  top: 16.19%;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
-  color: var(--color-navy);
-}
-.home-faq-title .accent {
-  color: var(--color-magenta);
+  left: 240px;
+  top: 120px;
 }
 .home-faq-sub {
   position: absolute;
-  left: 12.5%;
-  top: 26.32%;
+  left: 240px;
+  top: 195px;
   margin: 0;
   color: rgba(113, 113, 125, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 5px;
 }
 .home-faq-item {
   position: absolute;
-  left: 12.81%;
-  width: 74.22%;
-  background: rgba(248, 248, 249, 1);
+  left: 246px;
+  width: 1425px;
   border-radius: 16px;
+  background: rgba(248, 248, 249, 1);
+  text-align: left;
 }
+.home-faq-position-1 { top: 280px; }
+.home-faq-position-2 { top: 420px; }
+.home-faq-position-3 { top: 504px; }
+.home-faq-position-4 { top: 588px; }
 .home-faq-open {
-  top: 37.65%;
-  padding: 3.5% 4%;
+  display: flex;
+  height: 130px;
+  flex-direction: column;
+  padding: 25px 55px;
+}
+.home-faq-closed {
+  display: flex;
+  height: 74px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 55px;
 }
 .home-faq-q {
-  margin: 0;
   color: rgba(51, 51, 51, 1);
-  font-size: clamp(8px, 1.25vw, 24px);
+  font-size: 24px;
   font-weight: 500;
   letter-spacing: 5px;
 }
 .home-faq-a {
-  margin: 4% 0 0;
+  margin-top: 17px;
   color: rgba(102, 102, 102, 1);
-  font-size: clamp(6px, 0.9375vw, 18px);
+  font-size: 18px;
   letter-spacing: 5px;
-  line-height: 1.7;
-}
-.home-faq-closed {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2.8% 4%;
-  aspect-ratio: 1425 / 74;
-}
-.home-faq-closed .home-faq-q {
-  font-size: clamp(7px, 1.146vw, 22px);
+  line-height: 30px;
 }
 .home-faq-arrow {
   width: 20px;
   height: 20px;
-  object-fit: contain;
-  flex: none;
 }
-.home-faq-closed-2 { top: 56.54%; }
-.home-faq-closed-3 { top: 67.88%; }
-.home-faq-closed-4 { top: 79.22%; }
 .home-faq-more {
   position: absolute;
-  left: 12.81%;
-  top: 93.25%;
-  margin: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
+  left: 246px;
+  top: 690px;
   padding: 0;
   color: var(--color-navy);
-  font-size: clamp(7px, 1.042vw, 20px);
+  font-size: 20px;
   letter-spacing: 3px;
 }
 
-/* ---------- 服务流程（760，深蓝底） ---------- */
+/* 服务流程（760） */
 .home-process {
-  aspect-ratio: 1920 / 760;
+  height: 760px;
   background: rgba(4, 39, 105, 1);
 }
 .home-process-title {
   position: absolute;
-  left: 12.5%;
-  top: 9.21%;
-  margin: 0;
-  font-size: clamp(12px, 1.875vw, 36px);
-  font-weight: 700;
-  letter-spacing: 5px;
+  left: 240px;
+  top: 70px;
   color: #fff;
 }
-.home-process-title .accent {
-  color: var(--color-teal);
-}
+.home-process-title .accent { color: var(--color-teal); }
 .home-process-row {
   position: absolute;
-  left: 11.2%;
-  width: 77.6%;
+  left: 215px;
+  width: 1490px;
   display: flex;
   justify-content: space-between;
 }
-.home-process-row-1 { top: 25.66%; }
-.home-process-row-2 { top: 56.05%; }
+.home-process-row-1 { top: 195px; }
+.home-process-row-2 { top: 426px; }
 .home-process-step {
   display: flex;
+  width: 360px;
   flex-direction: column;
   align-items: center;
-  width: 24%;
 }
 .home-process-icon {
   width: 95px;
-  max-width: 4.95vw;
-  aspect-ratio: 1;
+  height: 95px;
   object-fit: contain;
 }
 .home-process-name {
-  margin: 6% 0 0;
+  margin: 22px 0 0;
   color: #fff;
-  font-size: clamp(7px, 1.146vw, 22px);
+  font-size: 22px;
   font-weight: 500;
   letter-spacing: 5px;
   white-space: nowrap;
 }
 .home-process-desc {
-  margin: 4% 0 0;
+  margin: 15px 0 0;
   color: #fff;
-  font-size: clamp(5px, 0.833vw, 16px);
+  font-size: 16px;
   letter-spacing: 5px;
-  line-height: 1.6;
+  line-height: 26px;
   text-align: center;
+}
+
+
+.home-content-tail {
+  position: relative;
+  width: 1920px;
+  height: 5383px;
+}
+.home-content-tail > .home-hospitals { position: absolute; top: 0; left: 0; }
+.home-content-tail > .home-cases { position: absolute; top: 1955px; left: 0; }
+.home-content-tail > .home-news { position: absolute; top: 2760px; left: 0; }
+.home-content-tail > .home-faq { position: absolute; top: 3442px; left: 0; }
+.home-content-tail > .home-process { position: absolute; top: 1075px; left: 0; }
+.home-content-tail > .consult-banner { position: absolute; top: 4173px; left: 0; }
+.home-content-tail > .footer { position: absolute; top: 4753px; left: 0; }
+
+
+.home-stage .utility-bar {
+  width: 1920px;
+  height: 40px;
+}
+.home-stage .site-header {
+  width: 1920px;
+  height: 106px;
+  padding: 0 160px;
+}
+.home-stage .main-nav {
+  width: 1920px;
+  height: 60px;
+  padding: 0 160px;
+}
+.home-stage .consult-banner {
+  width: 1920px;
+  height: 580px;
+  aspect-ratio: auto;
+}
+.home-stage .footer {
+  width: 1920px;
+  height: 630px;
+}
+.home-stage .footer-inner {
+  height: 560px;
+  padding: 90px 160px 55px;
+}
+.home-stage .copyright {
+  height: 70px;
 }
