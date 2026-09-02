@@ -28,3 +28,5 @@ design-reference/
 *.njsproj
 *.sln
 *.sw?
+
+/全套原型
