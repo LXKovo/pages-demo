@@ -16,6 +16,7 @@ export type Page =
   | 'news'
   | 'hospitalNews'
   | 'medicalGuide'
+  | 'membership'
 
 export const pagePaths: Record<Page, string> = {
   home: '/',
@@ -35,6 +36,7 @@ export const pagePaths: Record<Page, string> = {
   news: '/news',
   hospitalNews: '/hospital-news',
   medicalGuide: '/medical-guide',
+  membership: '/membership',
 }
 
 // 主导航中归属同一栏目的子页面 → 映射到主栏目，保证 nav 高亮正确
