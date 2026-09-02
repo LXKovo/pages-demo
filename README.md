@@ -8,7 +8,7 @@
 
 | 状态 | 页面 | 数量 |
 | --- | --- | --- |
-| ✅ 已实现真实页面 | 首页、搜索、疾病与治疗、治疗路径规划、检索疾病和状况 | 5 |
+| ✅ 已实现真实页面 | 首页、搜索、疾病与治疗、治疗路径规划、检索疾病和状况、会员服务 | 6 |
 | 🧩 已接通路由（PendingPage 占位） | 出国就医、我们的服务、全球医生、合作医院、服务案例、关于我们、预约服务、患者流程、IMDOC、新闻版块、全球医院动态、海外医疗资讯与指南 | 12 |
 
 全部 34 页的逐页明细见 [docs/UI.md](docs/UI.md)，进度矩阵见 [docs/tasks.md](docs/tasks.md)。
@@ -22,6 +22,7 @@
 | 疾病与治疗 | `/diseases` | 蓝湖整图热区导航：治疗方案/医院/专家/药物/案例/资讯锚点 + 咨询表单 |
 | 治疗路径规划 | `/planner` | 搜索 + 热门治疗标签，提交带词跳转疾病检索 |
 | 检索疾病和状况 | `/disease-search` | 关键词检索、身体系统 tabs、字母索引、疾病详情弹层；支持 `?q=` URL 预填 |
+| 会员服务 | `/membership` | 会员哲学、四档方案、权益矩阵、完整权益弹窗、服务旅程、家庭/企业方案与 FAQ；会员页专属 CTA，不渲染公共咨询表单 |
 
 ### 已接通路由（待逐页实现）
 
@@ -35,6 +36,7 @@
 | 合作医院 | `/hospitals` | 全球医院动态 | `/hospital-news` |
 | 服务案例 | `/cases` | 海外医疗资讯与指南 | `/medical-guide` |
 | 关于我们 | `/about` | | |
+| 会员服务 | `/membership` | | |
 
 顶部 Utility Bar（找医生/找医院/寻找治疗方法/预约服务）、Logo、搜索、患者流程与 IMDOC 入口均已连接对应路由。
 
@@ -110,6 +112,7 @@ src/
     ├── DiseaseSearchPage.tsx          # 疾病检索页
     ├── TreatmentPlannerPage.tsx       # 治疗路径规划页
     ├── DiseaseTreatmentPage.tsx       # 疾病与治疗整图热区页
+    ├── MembershipPage.tsx / .css       # 会员服务页（权益对比、FAQ、专属 CTA）
     ├── PendingPage.tsx / .css         # 待开发路由的统一过渡页
     └── ...
 
@@ -127,7 +130,7 @@ design-reference/                      # 蓝湖原型截图（仅本地开发参
 项目使用 react-router-dom v7，全量懒加载：
 
 - [src/types/routes.ts](src/types/routes.ts) 统一维护 `Page` 联合类型、`pagePaths` URL 映射与 `getPageFromPath` 路径解析；`PAGE_GROUP` 将 `disease-search` 等子页归组到主导航栏目，保证导航高亮正确。
-- [src/App.tsx](src/App.tsx) 以 `lazy` + `Suspense` 装配路由：`REAL_PAGES`（home / diseases / planner / search / diseaseSearch）直出真实页面，其余 12 页统一走 `PendingPage` 占位，`path="*"` 兜底回首页。
+- [src/App.tsx](src/App.tsx) 以 `lazy` + `Suspense` 装配路由：`REAL_PAGES`（home / diseases / planner / search / diseaseSearch / membership）直出真实页面，其余 12 页统一走 `PendingPage` 占位，`path="*"` 兜底回首页。
 - 路由切换自动滚动回顶，并按页面映射更新 `document.title`（SEO）。
 
 ## 设计系统

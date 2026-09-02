@@ -28,6 +28,7 @@ export const navigationItems: Array<{ label: string; page: Page }> = [
   { label: '疾病与治疗', page: 'diseases' },
   { label: '服务案例', page: 'cases' },
   { label: '关于我们', page: 'about' },
+  { label: '会员服务', page: 'membership' },
 ]
 
 export const pendingPageContent: Partial<Record<Page, { title: string; description: string; eyebrow: string }>> = {

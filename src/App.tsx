@@ -22,6 +22,7 @@ const PAGE_TITLES: Record<Page, string> = {
   news: '新闻版块 · 艾恩国际医疗',
   hospitalNews: '全球医院动态 · 艾恩国际医疗',
   medicalGuide: '海外医疗资讯与指南 · 艾恩国际医疗',
+  membership: '会员服务 · 艾恩国际医疗',
 }
 
 const HomePage = lazy(() =>
@@ -39,11 +40,14 @@ const SearchPage = lazy(() =>
 const DiseaseSearchPage = lazy(() =>
   import('./pages/DiseaseSearchPage').then(m => ({ default: m.DiseaseSearchPage }))
 )
+const MembershipPage = lazy(() =>
+  import('./pages/MembershipPage').then(m => ({ default: m.MembershipPage }))
+)
 const PendingPage = lazy(() =>
   import('./pages/PendingPage').then(m => ({ default: m.PendingPage }))
 )
 
-const REAL_PAGES: Page[] = ['home', 'diseases', 'planner', 'search', 'diseaseSearch']
+const REAL_PAGES: Page[] = ['home', 'diseases', 'planner', 'search', 'diseaseSearch', 'membership']
 const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PAGES.includes(page))
 
 function PageLoading() {
@@ -71,6 +75,7 @@ function App() {
           <Route path={pagePaths.planner} element={<TreatmentPlannerPage />} />
           <Route path={pagePaths.search} element={<SearchPage />} />
           <Route path={pagePaths.diseaseSearch} element={<DiseaseSearchPage />} />
+          <Route path={pagePaths.membership} element={<MembershipPage />} />
           {PENDING_PAGES.map(page => (
             <Route key={page} path={pagePaths[page]} element={<PendingPage page={page} />} />
           ))}

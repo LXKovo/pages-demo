@@ -23,6 +23,7 @@ const INFO_LINKS: FooterLink[] = [
   { label: '服务案例', page: 'cases' },
   { label: '常见问题', page: 'about' },
   { label: '在线预约', page: 'appointment' },
+  { label: '会员服务', page: 'membership' },
 ]
 
 const HOSPITAL_LINKS: FooterLink[] = [

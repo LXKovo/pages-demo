@@ -1,8 +1,8 @@
 # 任务执行与进度跟踪文档（tasks）
 
 > IM Medical International 艾恩国际医疗 —— 跨境医疗官网
-> 文档版本：v1.0 · 2026-08-31
-> 状态说明：当前已实现 5 个真实页面（首页 / 疾病与治疗 / 寻找治疗方法 / 搜索 / 检索疾病和状况），其余 29 页为 PendingPage 占位。
+> 文档版本：v1.1 · 2026-09-02
+> 状态说明：当前已实现 6 个真实页面（首页 / 疾病与治疗 / 寻找治疗方法 / 搜索 / 检索疾病和状况 / 会员服务），其余 28 页为 PendingPage 占位。
 
 ---
 
@@ -36,13 +36,14 @@ src/
     ├── DiseaseTreatmentPage.tsx   # ✅ 疾病与治疗（整图 + 热区方案）
     ├── TreatmentPlannerPage.tsx   # ✅ 寻找治疗方法（planner-artboard）
     ├── SearchPage.tsx             # ✅ 搜索（search-artboard）
+    ├── MembershipPage.tsx / .css  # ✅ 会员服务（权益方案、矩阵、FAQ、专属 CTA）
     └── PendingPage.tsx            # 占位页（hero + 能力卡片 + 状态提示）
 ```
 
 ### 1.3 路由装配逻辑（App.tsx）
 
 ```ts
-const REAL_PAGES: Page[] = ['home', 'diseases', 'planner', 'search', 'diseaseSearch']
+const REAL_PAGES: Page[] = ['home', 'diseases', 'planner', 'search', 'diseaseSearch', 'membership']
 const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PAGES.includes(page))
 ```
 
@@ -52,7 +53,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 
 ---
 
-## 2. 路由设计（当前 13 条）
+## 2. 路由设计（当前 18 条）
 
 | Page | 路径 | 现状 |
 | --- | --- | --- |
@@ -73,12 +74,13 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 | news | `/news` | PendingPage（设计稿 18 新闻版块） |
 | hospitalNews | `/hospital-news` | PendingPage（设计稿 11 全球医院动态） |
 | medicalGuide | `/medical-guide` | PendingPage（设计稿 12 海外医疗资讯与指南） |
+| membership | `/membership` | ✅ MembershipPage（会员方案、权益矩阵、完整权益弹窗、FAQ；按会员原型使用专属 CTA，不渲染公共咨询表单） |
 
 ---
 
 ## 3. 34 页设计稿 ↔ 路由映射与进度矩阵
 
-### 3.1 已实现（5 页）
+### 3.1 已实现（6 页）
 
 | 设计稿 | 页面 | 路由 | 实现方式 |
 | --- | --- | --- | --- |
@@ -87,6 +89,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 | 5 | 寻找治疗方法 | `/planner` | planner-artboard：标题 + 搜索框 + 热门搜索 chips（3 行 9 词） |
 | 8 | 搜索 | `/search` | search-artboard：搜索框 + 热门搜索（3 分类 + 6 疾病） |
 | 15 | 检索疾病和状况 | `/disease-search` | 组件化检索页：搜索 + 身体系统 tabs + 字母索引 + 疾病弹窗；支持 `?q=` URL 参数（搜索/寻找治疗方法页提交后带词跳转） |
+| — | 会员服务 | `/membership` | 组件化会员落地页：A/B/C/D 哲学、四档方案详情、核心权益矩阵、15 项权益弹窗、服务旅程、家庭/企业方案和 FAQ；使用项目公共 Header 与现有设计 token，会员页底部使用专属 CTA，不挂公共 SiteFooter。价格、次数、额度为原型参考值，并附协议及医疗服务免责声明。 |
 
 ### 3.2 待开发（31 页）—— 按优先级分批
 
@@ -126,7 +129,7 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 | 12 | 海外医疗资讯与指南 | 资讯区 | 资讯列表 | P3 | ⬜ |
 | 2 | 常见问题 | `/about` | 内容列表 | P4 | ⬜ |
 
-> 注：资讯类页面（新闻版块/新闻详情/全球医院动态/海外医疗资讯与指南）已建立独立路由占位（`/news`、`/hospital-news`、`/medical-guide`），Footer「有用信息 / 健康图书馆 / 全球医院」链接已可点击跳转；内容落地仍需按列表页模板实现。
+> 注：资讯类页面（新闻版块/新闻详情/全球医院动态/海外医疗资讯与指南）已建立独立路由占位（`/news`、`/hospital-news`、`/medical-guide`），Footer「有用信息 / 健康图书馆 / 全球医院」链接已可点击跳转；会员服务页 `/membership` 已实现，内容落地仍需按列表页模板实现。
 
 ---
 
@@ -191,8 +194,8 @@ const PENDING_PAGES = (Object.keys(pagePaths) as Page[]).filter(page => !REAL_PA
 
 ### 5.4 接入既有全局组件
 
-- 新页面必须复用 `SiteHeader`（导航高亮依赖 `getPageFromPath`）与 `SiteFooter`（含咨询表单）；
-- 咨询表单提交暂为纯前端，后续接后端接口。
+- 普通内容页面复用 `SiteHeader`（导航高亮依赖 `getPageFromPath`）与 `SiteFooter`（含咨询表单）；会员页按其独立原型复用 `SiteHeader`，使用自身底部 CTA，不渲染公共咨询表单。
+- 公共咨询表单提交暂为纯前端，后续接后端接口；移动端使用流式布局，避免桌面绝对定位造成控件重叠。
 
 ---
 
