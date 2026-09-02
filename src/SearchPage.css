@@ -90,7 +90,100 @@
 }
 
 @media (max-width: 900px) {
+  .search-artboard {
+    display: flex;
+    height: auto;
+    min-height: 460px;
+    flex-direction: column;
+    align-items: center;
+    padding: 58px 20px 52px;
+    overflow: visible;
+  }
+
+  .search-title-row {
+    position: static;
+    width: min(100%, 360px);
+    align-items: center;
+    gap: 12px;
+  }
   .search-title-row input {
+    width: 100%;
+    flex: 1;
+    font-size: clamp(28px, 8vw, 36px);
+    letter-spacing: 3px;
+  }
+  .search-title-row button {
+    width: clamp(42px, 12vw, 56px);
+    margin-top: 0;
+  }
+
+  .search-hot {
+    position: static;
+    margin-top: 28px;
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+
+  .search-list {
+    position: static;
+    transform: none;
+    margin-top: 16px;
+    gap: 6px;
+  }
+  .search-list li {
+    line-height: 20px;
+  }
+  .search-list button {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .search-page .consult-banner {
+    height: 430px;
+    min-height: 430px;
+    aspect-ratio: auto;
+  }
+  .search-page .consult-heading {
+    left: 20px;
+    top: 38px;
+  }
+  .search-page .consult-heading h2 {
+    font-size: clamp(20px, 6vw, 28px);
+    letter-spacing: 2px;
+  }
+  .search-page .consult-heading p {
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+  .search-page .consult-fields-row {
+    left: 20px;
+    right: 20px;
+    top: 132px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .search-page .consult-fields-row input {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  .search-page .consult-brief {
+    left: 20px;
+    top: 232px;
+    width: calc(100% - 40px);
+    height: 66px;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  .search-page .consult-submit {
+    left: 20px;
+    top: 324px;
+    width: 150px;
+    height: 44px;
+    font-size: 16px;
     letter-spacing: 3px;
   }
 }
